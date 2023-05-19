@@ -1,0 +1,22 @@
+import React from 'react'
+import Page from '../../components/Page'
+
+// const getRoles = async () => {
+//   const res = await fetch('https://kamo-api.herokuapp.com/api/role/list', {headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjYyNGVjZDY1ZjVjMjY1NjM4NWYyZWQ5NiIsIm9yZ2FuaXphdGlvbiI6eyJfaWQiOiI2MmMzZjI3ZDVhYWQ5MjVmNWUxNjBlYzMiLCJuYW1lIjoiTlNTIiwiZW1haWwiOiJuc3NAdGVzdG1haWwuY29tIiwicGhvbmUiOiIxMjEyMTIxMjEyIiwidW5pcXVlSWQiOiJPUkcxNjU3MDA4NzY1NzY5In0sInJvbGUiOnsiX2lkIjoiNjJlMGRmMjI2MmZiM2IyNWNiMDM5MjAwIiwibmFtZSI6IlNvY2lhbCBXb3JrZXIifSwiZm5hbWUiOiJSYWh1bCIsImxuYW1lIjoiU2hhcm1hIiwiZ2VuZGVyIjoibWFsZSIsImltYWdlIjoiaHR0cHM6Ly9rYW1vLWFwaS5oZXJva3VhcHAuY29tL0tBTU9fMTY1OTk1NzE3OTk0N19TYW5qZWViX3BpYyAoMSkuanBnIiwiZW1haWwiOiJyYWh1bHNoYXJtYUBnbWFpbC5jb20iLCJtb2JpbGUiOiI5ODc2NTQzMDAxIiwidXNlcm5hbWUiOiJyYWh1bHNoYXJtYSIsInBhc3N3b3JkIjoiIiwiZW1haWxPdHAiOjEyMzQsIm1vYmlsZU90cCI6MTIzNCwiaXNfdmVyaWZpZWQiOmZhbHNlLCJhZGRyZXNzIjoiS29sa2F0YSwgd2VzdCBiZW5nYWwiLCJjaXR5IjoiS29sa2F0YSIsInBpbiI6IjcwMDAwMSIsInN0YXR1cyI6dHJ1ZSwicmVwb3J0aW5nX3RvIjoiYWRtaW4iLCJjcmVhdGVkQXQiOiIyMDIyLTA0LTA3VDExOjM5OjE3LjA2N1oiLCJ1cGRhdGVkQXQiOiIyMDIyLTA5LTE4VDEzOjQzOjAyLjk1OVoiLCJfX3YiOjAsImJsb2NrIjp7Il9pZCI6IjYyNGVkY2EzZjVjMjY1NjM4NWYyZWRiZiIsIm5hbWUiOiJOYWJhZHdpcCJ9LCJkaXN0cmljdCI6eyJfaWQiOiI2MjRlZDhiYWY1YzI2NTYzODVmMmVkYjgiLCJuYW1lIjoiTmFkaWEifSwic3RhdGUiOnsiX2lkIjoiNjIyNWI1MmEwZTM3OTFjNjBiNzdkNDIyIiwibmFtZSI6Ildlc3QgQmVuZ2FsIn0sImRvYiI6IjE5ODktMTEtMTFUMDA6MDA6MDAuMDAwWiIsImlzX2RlbGV0ZWQiOmZhbHNlLCJ0ZXJtc19hbmRfY29uZGl0aW9ucyI6dHJ1ZSwibGFzdF9sb2dpbl90aW1lIjoiMjAyMi0wOS0xOFQxMzo0MzowMi45NTZaIiwicmVtZW1iZXJfbWUiOmZhbHNlfSwiaWF0IjoxNjYzNTE1NjA2fQ.4OkQzNx6Tl_2ysZLx-rWdMsdUGJXLPxJ03q4X8ZVIDQ"}})
+//   return res.json();
+// }
+
+
+
+function Profile() {
+
+  return (
+    <Page title="Profile | hire2inspire">
+        <div>
+            <p>User Profile</p>    
+        </div>
+    </Page>
+  )
+}
+
+export default Profile

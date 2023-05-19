@@ -1,0 +1,68 @@
+.button-holder {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    max-width: 258px;
+    flex: 0 0 258px;
+}
+
+
+/* .blocks-wrapper {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+} */
+.job-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.button-holder {
+    display: initial!important;
+    max-width: 100%!important;
+    margin-left: 0!important;
+    flex: 1;
+}
+.button-holder p {
+    margin-bottom: 0!important;
+    font-weight: 700;
+    color: #111;
+    font-size: 15px;
+}
+.button-holder p span {
+    color: #777;
+}
+.content-right .input-group input {
+    max-width: 80px;
+    text-align: center;
+}
+.content-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 2;
+}
+.content-right .purchase {
+    margin-left: 14px;
+}
+.job-list li .job-header {
+    border-bottom: none!important;
+    margin-bottom: 0;
+    
+}
+.content-right .full-width-btm {
+    margin-top: 0;
+    margin-left: 14px;
+}
+.btn-holder2 {
+    text-align: center;
+}
+.content-right .loginBtnLoader {
+    padding: 10px 30px!important;
+    width: 50%;
+}
+.content-right .input-group {
+    margin-left: 100px;
+}
