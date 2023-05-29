@@ -1,5 +1,18 @@
 import React from 'react'
 import allCat from '../../assets/imgs/allCat.svg'
+import cat1 from '../../assets/imgs/cat1.svg'
+import cat2 from '../../assets/imgs/cat2.svg'
+import cat3 from '../../assets/imgs/cat3.svg'
+import cat4 from '../../assets/imgs/cat4.svg'
+import cat5 from '../../assets/imgs/cat5.svg'
+import cat6 from '../../assets/imgs/cat6.svg'
+import cat7 from '../../assets/imgs/cat7.svg'
+import cat8 from '../../assets/imgs/cat8.svg'
+import cat9 from '../../assets/imgs/cat9.svg'
+import cat10 from '../../assets/imgs/cat9.svg'
+import cat11 from '../../assets/imgs/cat9.svg'
+import cat12 from '../../assets/imgs/cat9.svg'
+
 
 function CategoriesGrid() {
   return (
@@ -40,7 +53,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                            <img src="src/assets/imgs/cat1.svg"/>                                          
+                            <img src={cat1}/>                                          
                             </figure>
                             <h5>Accountancy</h5>
                         </div>
@@ -48,7 +61,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat2.svg"/>                                     
+                                <img src={cat2}/>                                     
                             </figure>
                             <h5>Banking</h5>
                         </div>
@@ -56,7 +69,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat3.svg"/>                                                                               
+                                <img src={cat3}/>                                                                               
                             </figure>
                             <h5>Charity & Voluntary</h5>
                         </div>
@@ -64,7 +77,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat4.svg"/>                                                                               
+                                <img src={cat4}/>                                                                               
                             </figure>
                             <h5>Digital & Creative</h5>
                         </div>
@@ -72,7 +85,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat5.svg"/>                                                                              
+                                <img src={cat5}/>                                                                              
                             </figure>
                             <h5>Estate Agency</h5>
                         </div>
@@ -80,7 +93,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat6.svg"/>                                                                              
+                                <img src={cat6}/>                                                                              
                             </figure>
                             <h5>Graduate</h5>
                         </div>
@@ -90,7 +103,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat7.svg"/>                                                                               
+                                <img src={cat7} />                                                                               
                             </figure>
                             <h5>IT Contractor</h5>
                         </div>
@@ -98,7 +111,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat8.svg"/>                                  
+                                <img src={cat8} />                                  
                             </figure>
                             <h5>Legal jobs</h5>
                         </div>
@@ -106,7 +119,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat9.svg"/>                                                                                                                       
+                                <img  src={cat9} />                                                                                                                       
                             </figure>
                             <h5>Leisure & Tourism</h5>
                         </div>
@@ -114,7 +127,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat10.svg"/>                                                                                                                    
+                                <img  src={cat10}  />                                                                                                                    
                             </figure>
                             <h5>Manufacturing jobs</h5>
                         </div>
@@ -122,7 +135,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat11.svg"/>                                                                                                                      
+                                <img src={cat11} />                                                                                                                      
                             </figure>
                             <h5>Marketing & PR</h5>
                         </div>
@@ -130,7 +143,7 @@ function CategoriesGrid() {
                     <li>
                         <div className="inner">
                             <figure>
-                                <img src="src/assets/imgs/cat12.svg"/>                                                                                                                       
+                                <img src={cat12} />                                                                                                                       
                             </figure>
                             <h5>Media</h5>
                         </div>
