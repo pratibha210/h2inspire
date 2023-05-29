@@ -12,6 +12,7 @@ import cat9 from '../../assets/imgs/cat9.svg'
 import cat10 from '../../assets/imgs/cat9.svg'
 import cat11 from '../../assets/imgs/cat9.svg'
 import cat12 from '../../assets/imgs/cat9.svg'
+import services from "../../assets/imgs/services.png";
 
 
 function CategoriesGrid() {
@@ -27,7 +28,7 @@ function CategoriesGrid() {
                     <a href="#" className="blue-button section-button-style">Learn More</a>
                 </div>
                 <div className="col-sm-12 col-md-6 text-center">
-                    <img src="src/assets/imgs/services.png" />
+                    <img src={services} alt='' />
                 </div>
             </div>
             <div className="categories-wrap">
