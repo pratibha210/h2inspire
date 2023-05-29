@@ -24,10 +24,6 @@ import notification2 from "../assets/imgs/notification.png";
 
 import notification1 from "../assets/imgs/notification-on.svg";
 
-
-
-
-
 function RecruiterDashboardLayout() {
   const auth = useAuth();
   const navigate = useNavigate();
