@@ -97,7 +97,7 @@ function AuthLayout() {
                                 <h4>Annie Jenifer</h4>
                                 <h6>Founder, JB Corps </h6>
                             </div>
-                            <img src="/src/assets/imgs/rating.png" />
+                            <img src={rating1} />
                         </div>
                       </div>
                     </SwiperSlide>
@@ -109,7 +109,7 @@ function AuthLayout() {
                                 <h4>Annie Jenifer</h4>
                                 <h6>Founder, JB Corps </h6>
                             </div>
-                            <img src="/src/assets/imgs/rating.png" />
+                            <img src={rating1} />
                         </div>
                       </div>
                     </SwiperSlide>

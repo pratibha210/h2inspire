@@ -7,11 +7,18 @@ import { agencyAccountDetails,inviteMultipleRecruiter } from '../api/api';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from "@mui/material/FormControl";
-
+import logo1 from "../assets/imgs/logo.png";
 import Loader from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import notification1 from "../assets/imgs/notification-on.svg";
+import notification2 from "../assets/imgs/notification.png";
+import profile1 from "../assets/imgs/profile.svg";
+import archive1 from "../assets/imgs/archive.svg";
+
+
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -126,7 +133,7 @@ const gotoProfile=()=>{
       <section className="dashboard-wrap">
         <div className="desh-header">
             <Link to={'/'} className="dash-logo">
-              <img src="/src/assets/imgs/logo.png" />
+              <img src={logo1} />
             </Link>
             <div className="rest-nav">
                 <div className="menu-bar">
@@ -139,13 +146,13 @@ const gotoProfile=()=>{
                     </ul>
                 </div>
                 <a href="#" className="noticication">
-                    <img className="off" src="/src/assets/imgs/notification-on.svg" />
-                    <img style={{display: 'none'}} className="on" src="/src/assets/imgs/notification.png" />
+                    <img className="off" src={notification1} />
+                    <img style={{display: 'none'}} className="on" src={notification2} />
                 </a>
                 <div className="profile">
                     <div className="pro-image" onClick={handleClick}>
                    
-                        <img src="/src/assets/imgs/profile.svg" />
+                        <img src={profile1} />
                    
                     </div>
                     <div className="profile-details">
@@ -191,7 +198,7 @@ const gotoProfile=()=>{
                       <a href="#" onClick={() => {
                         auth.logout()
                       }}>
-                          <img src="/src/assets/imgs/archive.svg" />
+                          <img src={archive1} />
                           <span>Log Out</span>
                       </a>
                   </li>
