@@ -1,5 +1,5 @@
 import React from 'react'
-import cat2 from '../../assets/imgs/cat2.svg'
+import allCat from '../../assets/imgs/allCat.svg'
 
 function CategoriesGrid() {
   return (
@@ -26,12 +26,13 @@ function CategoriesGrid() {
                         <a href="#" className="arrow-button">
                             All Categories
                             <span>
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                {/* <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 8H15" stroke="#A4A4A4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 <path d="M8 1L15 8L8 15" stroke="#A4A4A4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                </svg>
+                                </svg> */}
+                                 <img src={allCat} alt='cat2'/>
                             </span>
-                            {/* <img src={cat2} alt='cat2'/> */}
+                           
                         </a>
                     </div>
                 </div>
