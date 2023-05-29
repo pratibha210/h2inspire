@@ -2,15 +2,14 @@ import moment from "moment-timezone";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import {inviteMultipleAgencies,
-  agencyInvitedallList,
-} from "../../api/api";
+import { inviteMultipleAgencies, agencyInvitedallList } from "../../api/api";
 import "./EmployerDashboard.css";
 import Loader from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
+import jobLoc from "../../assets/imgs/jobLoc.svg";
 
 const style = {
   position: "absolute",
@@ -49,7 +48,6 @@ function AgencyList() {
   const [fetching, setFetching] = useState(false);
   const [loading, setLoading] = React.useState(true);
 
-
   useEffect(() => {
     async function fetchData() {
       // You can await here
@@ -69,49 +67,46 @@ function AgencyList() {
     fetchData();
   }, [status, fetching]);
 
- ////// selct multiple agency function //////
+  ////// selct multiple agency function //////
 
- const [modalopen, setModalOpen] = React.useState(false);
- const [errormsg, setErrormsg] = useState("");
- const [selectButton, setSelectButton] = useState(false);
+  const [modalopen, setModalOpen] = React.useState(false);
+  const [errormsg, setErrormsg] = useState("");
+  const [selectButton, setSelectButton] = useState(false);
 
- const handleModalOpen = (e) => {
-   setModalOpen(true);
- };
+  const handleModalOpen = (e) => {
+    setModalOpen(true);
+  };
 
- const handleModalClose = () => {
-   setModalOpen(false);
-   setErrormsg("");
- };
+  const handleModalClose = () => {
+    setModalOpen(false);
+    setErrormsg("");
+  };
 
+  const inviteAgencyFunc = async (e) => {
+    e.preventDefault();
+    e.preventDefault();
+    const formdata = new FormData(e.currentTarget);
+    if (!formdata.get("email")) return false;
 
- const inviteAgencyFunc = async (e) => {
-   e.preventDefault();
-   e.preventDefault();
-   const formdata = new FormData(e.currentTarget);
-   if (!formdata.get("email")) return false;
-
-   const body = {
-     email: formdata
-       .get("email")
-       ?.split("|")
-       .map((e) => e.trim()),
-     callback: window.location.origin + "/agency/register"
-   };
-   setSelectButton(true);
-   const resp = await inviteMultipleAgencies(body);
-   console.log("Agency resp  >>>>>>>>>> ", resp);
-   if (resp?.data?.error == false) {
-     handleModalClose();
-     setSelectButton(false);
-     // setAgencyList(resp?.data?.data);
-   } else {
-     setErrormsg(resp?.data?.message);
-     setSelectButton(false);
-   }
-
-
- }
+    const body = {
+      email: formdata
+        .get("email")
+        ?.split("|")
+        .map((e) => e.trim()),
+      callback: window.location.origin + "/agency/register",
+    };
+    setSelectButton(true);
+    const resp = await inviteMultipleAgencies(body);
+    console.log("Agency resp  >>>>>>>>>> ", resp);
+    if (resp?.data?.error == false) {
+      handleModalClose();
+      setSelectButton(false);
+      // setAgencyList(resp?.data?.data);
+    } else {
+      setErrormsg(resp?.data?.message);
+      setSelectButton(false);
+    }
+  };
 
   return (
     <>
@@ -123,27 +118,23 @@ function AgencyList() {
         <>
           <div className="recent-jobsection">
             <div className="d-flex justify-content-between align-items-center mb-4">
-              <h3 className="dash-heading">
-              {"Agency"}
-              </h3>
-             
+              <h3 className="dash-heading">{"Agency"}</h3>
             </div>
             <ul className="job-list job-list__single">
-             <li><button onClick={() => handleModalOpen()}>INVITE AGENCY</button></li>
+              <li>
+                <button onClick={() => handleModalOpen()}>INVITE AGENCY</button>
+              </li>
               {jobPostings.length ? (
                 jobPostings.map((e, i) => {
                   return (
                     <li key={i}>
                       <div className="job-box">
                         <div className="job-header">
-                         
                           <div className="job-company">
-                            <h4>
-                          Agency Email Id
-                            </h4>
+                            <h4>Agency Email Id</h4>
                             <div className="job-location">
                               <span>
-                                <svg
+                                {/* <svg
                                   width="18"
                                   height="18"
                                   viewBox="0 0 18 18"
@@ -164,23 +155,25 @@ function AgencyList() {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                   ></path>
-                                </svg>
+                                </svg> */}
+                                <img src={jobLoc} alt="job location" />
                               </span>
                               <h5>{e.email}</h5>
                             </div>
                           </div>
                           <div className="button-holder">
                             <p
-                            
                               // to={"#"}
                               className="light-btm  m-3"
                             >
-                                {e?.status === "0" ?"Pending" : e?.status === "1" ? "Working on" : e?.status === "2" && "Declined"}
+                              {e?.status === "0"
+                                ? "Pending"
+                                : e?.status === "1"
+                                ? "Working on"
+                                : e?.status === "2" && "Declined"}
                             </p>
-                       
                           </div>
                         </div>
-                        
                       </div>
                     </li>
                   );
@@ -191,48 +184,49 @@ function AgencyList() {
             </ul>
 
             <Modal
-          open={modalopen}
-          onClose={handleModalClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <form onSubmit={(e) => inviteAgencyFunc(e)}>
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Assign multiple Agencies by email id
-              </Typography>
+              open={modalopen}
+              onClose={handleModalClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <form onSubmit={(e) => inviteAgencyFunc(e)}>
+                <Box sx={style}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Assign multiple Agencies by email id
+                  </Typography>
 
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <h4 className="form-heading">Email (use '|' separator)</h4>
+                  <FormControl sx={{ m: 1, width: 300 }}>
+                    <h4 className="form-heading">Email (use '|' separator)</h4>
 
-                <div className="mb-3">
-
-                  <input
-                    required
-                    type="text"
-                    className="input-style2"
-                    id="agency email"
-                    placeholder=""
-                    name="email"
-
-                  />
-                </div>
-              </FormControl>
-              <span className="text-danger mx-3">{errormsg}</span>
-              <button
-                type="submit"
-
-                className="full-width-btm loginBtnLoader"
-              >
-                {selectButton == true ? (
-                  <Loader className="btnLoader" />
-                ) : (
-                  "Save"
-                )}
-              </button>
-            </Box>
-          </form>
-        </Modal>
+                    <div className="mb-3">
+                      <input
+                        required
+                        type="text"
+                        className="input-style2"
+                        id="agency email"
+                        placeholder=""
+                        name="email"
+                      />
+                    </div>
+                  </FormControl>
+                  <span className="text-danger mx-3">{errormsg}</span>
+                  <button
+                    type="submit"
+                    className="full-width-btm loginBtnLoader"
+                  >
+                    {selectButton == true ? (
+                      <Loader className="btnLoader" />
+                    ) : (
+                      "Save"
+                    )}
+                  </button>
+                </Box>
+              </form>
+            </Modal>
           </div>
         </>
       )}
