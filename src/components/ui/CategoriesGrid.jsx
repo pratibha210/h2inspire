@@ -1,4 +1,5 @@
 import React from 'react'
+import cat2 from '../../assets/imgs/cat2.svg'
 
 function CategoriesGrid() {
   return (
@@ -30,6 +31,7 @@ function CategoriesGrid() {
                                 <path d="M8 1L15 8L8 15" stroke="#A4A4A4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             </span>
+                            {/* <img src={cat2} alt='cat2'/> */}
                         </a>
                     </div>
                 </div>

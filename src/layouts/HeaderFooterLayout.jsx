@@ -3,6 +3,8 @@ import { Link, NavLink, Outlet } from 'react-router-dom'
 import ScrollButton from '../components/ScrollButton'
 import '../layouts/HeaderFooterLayout.css'
 import { useSessionStorage, useLocalStorage } from "../hooks/useStorage"
+import logo from "../assets/imgs/logo.png";
+import profile  from "../assets/imgs/profile.svg";
 
 function HeaderFooterLayout() {
   const [user, setUser, removeUser] = useLocalStorage("AUTH_USER")
@@ -24,7 +26,7 @@ function HeaderFooterLayout() {
               <div className="container container-flex">
                   <div className="logo">
                       <Link to={'/'}>
-                        <img src="/src/assets/imgs/logo.png" alt="Logo" />
+                        <img src={logo}alt="Logo" />
                       </Link>
                   </div>
                   <div className="bars">
@@ -44,7 +46,7 @@ function HeaderFooterLayout() {
                     <Link to = "/agency/dashboard" >
                         <div className="profile">
                             <div className="pro-image">
-                                <img src="/src/assets/imgs/profile.svg" />
+                                <img src={profile} />
                             </div>
                             <div className="profile-details">
                                 <span className="name">{user?.name}</span>
