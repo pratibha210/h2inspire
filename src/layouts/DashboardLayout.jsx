@@ -1,17 +1,29 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
 import { AgencySidebarConfig } from "./SidebarConfig";
-import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/auth';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { useAuth } from "../context/auth";
 // import { useLocalStorage } from '../hooks/useStorage';
-import { agencyAccountDetails,inviteMultipleRecruiter } from '../api/api';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import { agencyAccountDetails, inviteMultipleRecruiter } from "../api/api";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
 import Loader from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import logo1 from "../assets/imgs/logo.png";
+import notification1 from "../assets/imgs/notification-on.svg";
+import notification2 from "../assets/imgs/notification.png";
+import profile1 from "../assets/imgs/profile.svg";
+import archive1 from "../assets/imgs/archive.svg";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,31 +42,30 @@ function DashboardLayout() {
   const location = useLocation();
   const logout = () => {
     localStorage.clear();
-    navigate("/", { replace: true })
-  }
+    navigate("/", { replace: true });
+  };
 
-// const user = JSON.parse(localStorage.getItem("AUTH_USER"))
+  // const user = JSON.parse(localStorage.getItem("AUTH_USER"))
 
-const [anchorEl, setAnchorEl] = React.useState(null);
-const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
-const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
   const token = localStorage.getItem("AUTH_USER");
-
 
   /* Agency details API call function */
   const agencyDetails = async () => {
     await agencyAccountDetails()
       .then((res) => {
         const { response } = res;
-        if(response?.status == 500){
+        if (response?.status == 500) {
           localStorage.clear();
-          navigate("/")
-      }else if (res?.response?.status == 401){
-        localStorage.clear();
-        navigate("/");
-      }
-      console.log(res,"jhvjhjhcjc")
+          navigate("/");
+        } else if (res?.response?.status == 401) {
+          localStorage.clear();
+          navigate("/");
+        }
+        console.log(res, "jhvjhjhcjc");
 
         if (response?.data.error === true) {
           // setErrorMessage(response?.data.message);
@@ -71,21 +82,21 @@ const [user, setUser] = useState({});
     agencyDetails();
   }, [token]);
 
-const handleClick = (event) => {
-  setAnchorEl(event.currentTarget);
-};
-const handleClose = () => {
-  setAnchorEl(null);
-};
-const gotoChangePassword=()=>{
-  setAnchorEl(null);
-  navigate("/agency/change-password")
-}
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const gotoChangePassword = () => {
+    setAnchorEl(null);
+    navigate("/agency/change-password");
+  };
 
-const gotoProfile=()=>{
-  setAnchorEl(null);
-  navigate("/agency/profile")
-}
+  const gotoProfile = () => {
+    setAnchorEl(null);
+    navigate("/agency/profile");
+  };
 
   ////// selct multiple agency function //////
 
@@ -102,7 +113,6 @@ const gotoProfile=()=>{
     setErrormsg("");
   };
 
-
   const inviteAgencyFunc = async (e) => {
     e.preventDefault();
     e.preventDefault();
@@ -114,7 +124,7 @@ const gotoProfile=()=>{
         .get("email")
         ?.split("|")
         .map((e) => e.trim()),
-      callback: window.location.origin + "/recruiter/login"
+      callback: window.location.origin + "/recruiter/login",
     };
     setSelectButton(true);
     const resp = await inviteMultipleRecruiter(body);
@@ -127,9 +137,7 @@ const gotoProfile=()=>{
       setErrormsg(resp?.data?.message);
       setSelectButton(false);
     }
-
-
-  }
+  };
   // const navLinkStyles = ({ isActive }) => {
   //   return {
   //     color: isActive ? '#0c7698' : '#000',
@@ -139,7 +147,6 @@ const gotoProfile=()=>{
   // }
 
   return (
-
     <>
       {/* <Outlet />
       <button onClick={() => logout()}>logout</button>
@@ -157,87 +164,98 @@ const gotoProfile=()=>{
 
       <section className="dashboard-wrap">
         <div className="desh-header">
-            <Link to={'/'} className="dash-logo">
-              <img src="/src/assets/imgs/logo.png" />
-            </Link>
-            <div className="rest-nav">
-                <div className="menu-bar">
-                    <div className="cross"><i className="fa-solid fa-xmark"></i></div>
-                    <ul>
-                    {/* <li><a href="#" onClick={() => handleModalOpen()}>INVITE RECRUITER</a></li> */}
-                        <li><a href="#">BROWSE JOBS</a></li>
-                        <li><a href="#">EMPLOYERS</a></li>
-                        <li><a href="#">PACKAGES</a></li>
-                    </ul>
-                </div>
-                <a href="#" className="noticication">
-                    <img className="off" src="/src/assets/imgs/notification-on.svg" />
-                    <img style={{display: 'none'}} className="on" src="/src/assets/imgs/notification.png" />
-                </a>
-                <div className="profile">
-                    <div className="pro-image" onClick={handleClick}>
-                    {user?.agency_account_info?.recruiter_image !=='' ?
-                    <img src={user?.agency_account_info?.recruiter_image}/>
-                    :
-                        <img src="/src/assets/imgs/profile.svg" />
-                    }
-                    </div>
-                    <div className="profile-details">
-                        {user?.name && 
-                          <span className="name">{user?.name}</span>
-                        }
-                        {user?.corporate_email && 
-                          <span className="email">{user?.corporate_email}</span>
-                        }
-
-                        {user?.fname && 
-                          <span className="name">{user?.fname} {user?.lname}</span>
-                        }
-                        {user?.email && 
-                          <span className="email">{user?.email}</span>
-                        }
-
-                    </div>
-                </div>
-                <div className="ham">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+          <Link to={"/"} className="dash-logo">
+            <img src={logo1} />
+          </Link>
+          <div className="rest-nav">
+            <div className="menu-bar">
+              <div className="cross">
+                <i className="fa-solid fa-xmark"></i>
+              </div>
+              <ul>
+                {/* <li><a href="#" onClick={() => handleModalOpen()}>INVITE RECRUITER</a></li> */}
+                <li>
+                  <a href="#">BROWSE JOBS</a>
+                </li>
+                <li>
+                  <a href="#">EMPLOYERS</a>
+                </li>
+                <li>
+                  <a href="#">PACKAGES</a>
+                </li>
+              </ul>
             </div>
+            <a href="#" className="noticication">
+              <img className="off" src={notification1} />
+              <img
+                style={{ display: "none" }}
+                className="on"
+                src={notification2}
+              />
+            </a>
+            <div className="profile">
+              <div className="pro-image" onClick={handleClick}>
+                {user?.agency_account_info?.recruiter_image !== "" ? (
+                  <img src={user?.agency_account_info?.recruiter_image} />
+                ) : (
+                  <img src={profile1} />
+                )}
+              </div>
+              <div className="profile-details">
+                {user?.name && <span className="name">{user?.name}</span>}
+                {user?.corporate_email && (
+                  <span className="email">{user?.corporate_email}</span>
+                )}
+
+                {user?.fname && (
+                  <span className="name">
+                    {user?.fname} {user?.lname}
+                  </span>
+                )}
+                {user?.email && <span className="email">{user?.email}</span>}
+              </div>
+            </div>
+            <div className="ham">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
         </div>
         <div className="dash-body">
           <div className="inner-wrap">
-          {user?.candidate_seniority &&
-            <div className="left-panel">
-              <div className="sidebar-close">
+            {user?.candidate_seniority && (
+              <div className="left-panel">
+                <div className="sidebar-close">
                   <i className="fa-solid fa-xmark"></i>
-              </div>
-              <h2>Job Status</h2>
+                </div>
+                <h2>Job Status</h2>
 
-              <ul>
-                { AgencySidebarConfig && AgencySidebarConfig.map((val, index) => (
-               
-                  <li key={index}>
-                    <NavLink to={val.path} key={index} >
-                      <img src={val.icon} />
-                      <span>{val.title}</span>
-                    </NavLink>
-                  </li>
-
-                ))}
+                <ul>
+                  {AgencySidebarConfig &&
+                    AgencySidebarConfig.map((val, index) => (
+                      <li key={index}>
+                        <NavLink to={val.path} key={index}>
+                          <img src={val.icon} />
+                          <span>{val.title}</span>
+                        </NavLink>
+                      </li>
+                    ))}
 
                   <li>
-                      <a href="#" onClick={() => {
-                        auth.logout()
-                      }}>
-                          <img src="/src/assets/imgs/archive.svg" />
-                          <span>Log Out</span>
-                      </a>
+                    <a
+                      href="#"
+                      onClick={() => {
+                        auth.logout();
+                      }}
+                    >
+                      <img src={archive1} />
+                      <span>Log Out</span>
+                    </a>
                   </li>
-              </ul>
-            </div>
-          }
+                </ul>
+              </div>
+            )}
             {/* <Modal
           open={modalopen}
           onClose={handleModalClose}
@@ -287,21 +305,21 @@ const gotoProfile=()=>{
           </div>
         </div>
         <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={gotoProfile}>Profile</MenuItem>
-        <MenuItem onClick={gotoChangePassword}>Change password</MenuItem>
-        {/* <MenuItem onClick={logout}>Logout</MenuItem> */}
-      </Menu>
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem onClick={gotoProfile}>Profile</MenuItem>
+          <MenuItem onClick={gotoChangePassword}>Change password</MenuItem>
+          {/* <MenuItem onClick={logout}>Logout</MenuItem> */}
+        </Menu>
       </section>
     </>
-  )
+  );
 }
 
-export default DashboardLayout
+export default DashboardLayout;

@@ -9,14 +9,20 @@ import {
 } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { useLocalStorage } from "../hooks/useStorage";
-import { employerProfleDetails, inviteMultipleAgencies } from "../api/api"
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import { employerProfleDetails, inviteMultipleAgencies } from "../api/api";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Loader from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import notification from "../assets/imgs/notification.png";
+import profile from "../assets/imgs/profile.svg";
+import notificationOn from "../assets/imgs/notification-on.svg";
+import archive from "../assets/imgs/archive.svg";
+import logo from "../assets/imgs/logo.png";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -42,7 +48,6 @@ function EmployerDashboardLayout(props) {
   const [user, setUser] = useState({});
   const token = localStorage.getItem("AUTH_USER");
 
-
   /* Employer details API call function */
   const employerDetails = async () => {
     await employerProfleDetails()
@@ -50,10 +55,10 @@ function EmployerDashboardLayout(props) {
         const { response } = res;
         if (response?.status == 500) {
           localStorage.clear();
-          navigate("/")
-        }else if(response?.status == 401){
+          navigate("/");
+        } else if (response?.status == 401) {
           localStorage.clear();
-          navigate("/")
+          navigate("/");
         }
         if (response?.data.error === true) {
           // setErrorMessage(response?.data.message);
@@ -86,14 +91,13 @@ function EmployerDashboardLayout(props) {
   };
   const gotoChangePassword = () => {
     setAnchorEl(null);
-    navigate("/employer/change-password")
-  }
+    navigate("/employer/change-password");
+  };
 
   const gotoProfile = () => {
     setAnchorEl(null);
-    navigate("/employer/profile")
-  }
-
+    navigate("/employer/profile");
+  };
 
   ////// selct multiple agency function //////
 
@@ -110,7 +114,6 @@ function EmployerDashboardLayout(props) {
     setErrormsg("");
   };
 
-
   const inviteAgencyFunc = async (e) => {
     e.preventDefault();
     e.preventDefault();
@@ -122,7 +125,7 @@ function EmployerDashboardLayout(props) {
         .get("email")
         ?.split("|")
         .map((e) => e.trim()),
-      callback: window.location.origin + "/agency/register"
+      callback: window.location.origin + "/agency/register",
     };
     setSelectButton(true);
     const resp = await inviteMultipleAgencies(body);
@@ -135,9 +138,7 @@ function EmployerDashboardLayout(props) {
       setErrormsg(resp?.data?.message);
       setSelectButton(false);
     }
-
-
-  }
+  };
 
   return (
     <>
@@ -158,7 +159,7 @@ function EmployerDashboardLayout(props) {
       <section className="dashboard-wrap">
         <div className="desh-header">
           <Link to={"/"} className="dash-logo">
-            <img src="/src/assets/imgs/logo.png" />
+            <img src={logo} />
           </Link>
           <div className="rest-nav">
             <div className="menu-bar">
@@ -180,11 +181,11 @@ function EmployerDashboardLayout(props) {
               </ul>
             </div>
             <a href="#" className="noticication">
-              <img className="off" src="/src/assets/imgs/notification-on.svg" />
+              <img className="off" src={notificationOn} />
               <img
                 style={{ display: "none" }}
                 className="on"
-                src="/src/assets/imgs/notification.png"
+                src={notification}
               />
             </a>
             <div className="profile">
@@ -193,7 +194,7 @@ function EmployerDashboardLayout(props) {
                 {user?.employer_image ? (
                   <img src={user?.employer_image} />
                 ) : (
-                  <img src="/src/assets/imgs/profile.svg" />
+                  <img src={profile} />
                 )}
                 {/* </Link> */}
               </div>
@@ -229,7 +230,6 @@ function EmployerDashboardLayout(props) {
               <ul>
                 {EmployerSidebarConfig &&
                   EmployerSidebarConfig.map((val, index) => (
-                 
                     <li key={index}>
                       <NavLink to={val.path} key={index}>
                         <img src={val.icon} />
@@ -245,7 +245,7 @@ function EmployerDashboardLayout(props) {
                       auth.logout();
                     }}
                   >
-                    <img src="/src/assets/imgs/archive.svg" />
+                    <img src={archive} />
                     <span>Log Out</span>
                   </a>
                 </li>
@@ -262,15 +262,13 @@ function EmployerDashboardLayout(props) {
           open={open}
           onClose={handleClose}
           MenuListProps={{
-            'aria-labelledby': 'basic-button',
+            "aria-labelledby": "basic-button",
           }}
         >
           <MenuItem onClick={gotoProfile}>Profile</MenuItem>
           <MenuItem onClick={gotoChangePassword}>Change password</MenuItem>
           <MenuItem onClick={creditsPage}>Credits</MenuItem>
         </Menu>
-
-
 
         <Modal
           open={modalopen}
@@ -288,7 +286,6 @@ function EmployerDashboardLayout(props) {
                 <h4 className="form-heading">Email (use '|' separator)</h4>
 
                 <div className="mb-3">
-
                   <input
                     required
                     type="text"
@@ -296,16 +293,11 @@ function EmployerDashboardLayout(props) {
                     id="agency email"
                     placeholder=""
                     name="email"
-
                   />
                 </div>
               </FormControl>
               <span className="text-danger mx-3">{errormsg}</span>
-              <button
-                type="submit"
-
-                className="full-width-btm loginBtnLoader"
-              >
+              <button type="submit" className="full-width-btm loginBtnLoader">
                 {selectButton == true ? (
                   <Loader className="btnLoader" />
                 ) : (

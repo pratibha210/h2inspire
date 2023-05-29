@@ -3,6 +3,10 @@ import { Link, Outlet } from 'react-router-dom';
 import './AuthLayout.css';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
+import logo1 from "../assets/imgs/logo.png"
+import login1 from "../assets/imgs/login-bg.jpg"
+import rating1 from "../assets/imgs/rating.png"
+
 
 function AuthLayout() {
   return (
@@ -17,7 +21,7 @@ function AuthLayout() {
                   <div className="form-top">
                       <figure>
                           <Link to={'/'}>
-                            <img src="/src/assets/imgs/logo.png" />
+                            <img src={logo1} />
                           </Link>
                       </figure>
                       <h3>
@@ -29,7 +33,7 @@ function AuthLayout() {
                   
               </div>
           </div>
-          <div className="log-right" style={{"backgroundImage": "url('/src/assets/imgs/login-bg.jpg')"}}>
+          <div className="log-right" style={{"backgroundImage": `url(${login1})`}}>
               <div className="slide-wrap">
                   {/* <div className="swiper testimonial">
                       <div className="swiper-wrapper">
@@ -81,7 +85,7 @@ function AuthLayout() {
                                 <h4>Annie Jenifer</h4>
                                 <h6>Founder, JB Corps </h6>
                             </div>
-                            <img src="/src/assets/imgs/rating.png" />
+                            <img src={rating1} />
                         </div>
                       </div>
                     </SwiperSlide>
