@@ -120,7 +120,7 @@ function Home() {
                         </div>
                         <div className="col-12 col-md-12 col-lg-5">
                             <div className="banner-img">
-                                <img src="src/assets/imgs/banner-img.png" alt="" className="img-fluid" />
+                                <img src={banner} alt="" className="img-fluid" />
                             </div>
                         </div>
                     </div>
