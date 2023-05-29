@@ -1,4 +1,5 @@
 import React from 'react'
+import lady from '../../assets/imgs/lady-image.png'
 
 function ContactUsSection() {
   return (
@@ -33,7 +34,7 @@ function ContactUsSection() {
                     </form>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-5 text-center align-self-end ">
-                    <img src="src/assets/imgs/lady-image.png" alt='Contact us image'/>
+                    <img src={lady} alt='Contact us image'/>
                 </div>
             </div>
         </div>
