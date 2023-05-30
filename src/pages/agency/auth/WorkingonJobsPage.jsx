@@ -18,7 +18,6 @@ import jobLoc from "../../../assets/imgs/jobLoc.svg";
 import agency2 from "../../../assets/imgs/agency2.svg";
 import agency3 from "../../../assets/imgs/agency3.svg";
 import agency4 from "../../../assets/imgs/agency4.svg";
-import agency5 from "../../../assets/imgs/agency5.svg";
 import profile1 from "../../../assets/imgs/profile.svg";
 function WorkingonJobsPage() {
   const [jobPostings, setJobPostings] = useState([]);

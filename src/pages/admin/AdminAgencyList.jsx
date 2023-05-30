@@ -9,6 +9,7 @@ import {
 import "./Dashboard.css";
 import Loader from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
+import jobLoc1 from "../../assets/imgs/jobLoc.svg";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -153,14 +154,11 @@ function AdminAgencyList() {
                     <li key={i}>
                       <div className="job-box">
                         <div className="job-header">
-                         
                           <div className="job-company">
-                            <h4>
-                            {e?.name}
-                            </h4>
+                            <h4>{e?.name}</h4>
                             <div className="job-location">
                               <span>
-                                <svg
+                                {/* <svg
                                   width="18"
                                   height="18"
                                   viewBox="0 0 18 18"
@@ -181,32 +179,43 @@ function AdminAgencyList() {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                   ></path>
-                                </svg>
+                                </svg> */}
+                                <img src={jobLoc1} />
                               </span>
                               <h5>{e.corporate_email}</h5>
                             </div>
                           </div>
                           <div className="button-holder">
-                          <p
-                              onClick={() =>navigate(`/admin/agency-details?id=${e?._id}`)}
+                            <p
+                              onClick={() =>
+                                navigate(`/admin/agency-details?id=${e?._id}`)
+                              }
                               className="light-btm blue-light m-3"
                             >
                               Details
                             </p>
-                         
-                            {e?.is_approved == false ?
-                          <p className="light-btm blue-light" onClick={(evt) => updateStatus(evt, "true", e?._id)}>
-                         Approve 
-                            </p>
-                            :
-                            <p className="light-btm red-light" onClick={(evt) => updateStatus(evt, "false", e?._id)}>
-                              Decline
-                            </p>
-                          }
-                           
+
+                            {e?.is_approved == false ? (
+                              <p
+                                className="light-btm blue-light"
+                                onClick={(evt) =>
+                                  updateStatus(evt, "true", e?._id)
+                                }
+                              >
+                                Approve
+                              </p>
+                            ) : (
+                              <p
+                                className="light-btm red-light"
+                                onClick={(evt) =>
+                                  updateStatus(evt, "false", e?._id)
+                                }
+                              >
+                                Decline
+                              </p>
+                            )}
                           </div>
                         </div>
-                        
                       </div>
                     </li>
                   );

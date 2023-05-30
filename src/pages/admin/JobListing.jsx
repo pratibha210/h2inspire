@@ -10,6 +10,11 @@ import {
 import "./Dashboard.css"
 import Loader from "@mui/material/CircularProgress";
 import {useNavigate} from 'react-router-dom';
+import jobLoc1 from "../../assets/imgs/jobLoc.svg";
+import agency2 from "../../assets/imgs/agency2.svg";
+import jobs5 from "../../assets/imgs/jobs5.svg";
+import jobs6 from "../../assets/imgs/jobs6.svg";
+import agency4 from "../../assets/imgs/agency4.svg";
 
 function JobListing() {
   const [jobPostings, setJobPostings] = useState([]);
@@ -210,7 +215,7 @@ async function editStatus(evt, status, id) {
                             </h4>
                             <div className="job-location">
                               <span>
-                                <svg
+                                {/* <svg
                                   width="18"
                                   height="18"
                                   viewBox="0 0 18 18"
@@ -231,23 +236,34 @@ async function editStatus(evt, status, id) {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                   ></path>
-                                </svg>
+                                </svg> */}
+                                <img src={jobLoc1} />
                               </span>
-                              <h5>  {e?.job_location.join(", ")} </h5>
+                              <h5> {e?.job_location.join(", ")} </h5>
                             </div>
                           </div>
 
                           <div className="other-details">
-                          {e?.is_approved == false ?
-                          <p className="light-btm blue-light" onClick={(evt) => updateStatus(evt, "true", e?._id)}>
-                         Approve 
-                            </p>
-                            :
-                            <p className="light-btm red-light" onClick={(evt) => updateStatus(evt, "false", e?._id)}>
-                              Decline
-                            </p>
-                          }
-                          {/* <Link
+                            {e?.is_approved == false ? (
+                              <p
+                                className="light-btm blue-light"
+                                onClick={(evt) =>
+                                  updateStatus(evt, "true", e?._id)
+                                }
+                              >
+                                Approve
+                              </p>
+                            ) : (
+                              <p
+                                className="light-btm red-light"
+                                onClick={(evt) =>
+                                  updateStatus(evt, "false", e?._id)
+                                }
+                              >
+                                Decline
+                              </p>
+                            )}
+                            {/* <Link
                               to={`/admin/job-post?jobId=${e._id}&employe=${e?.employer?._id}`}
                               className="light-btm blue-light m-3"
                             >
@@ -255,7 +271,11 @@ async function editStatus(evt, status, id) {
                             </Link> */}
                             <p
                               className="light-btm blue-light"
-                              onClick={() => navigate(`/admin/job-post?jobId=${e._id}&employe=${e?.employer?._id}`)}
+                              onClick={() =>
+                                navigate(
+                                  `/admin/job-post?jobId=${e._id}&employe=${e?.employer?._id}`
+                                )
+                              }
                             >
                               Edit
                             </p>
@@ -283,7 +303,7 @@ async function editStatus(evt, status, id) {
                           </div> */}
                         </div>
                         <div className="job-content">
-                        <h2>{e?.designation}</h2>
+                          <h2>{e?.designation}</h2>
                           {/* {e.job_description} */}
                           <div
                             dangerouslySetInnerHTML={createMarkup(
@@ -293,7 +313,7 @@ async function editStatus(evt, status, id) {
                           <ul>
                             <li>
                               <span>
-                                <svg
+                                {/* <svg
                                   width="16"
                                   height="16"
                                   viewBox="0 0 16 16"
@@ -304,13 +324,14 @@ async function editStatus(evt, status, id) {
                                     d="M8 16C12.4172 16 16 12.4172 16 8C16 3.58285 12.4172 0 8 0C3.58285 0 0 3.58285 0 8C0 12.4172 3.58285 16 8 16ZM7.42855 3.42858C7.42855 3.11428 7.6857 2.85713 8 2.85713C8.3143 2.85713 8.57145 3.11428 8.57145 3.42858V7.72572L11.2143 9.84001C11.46 10.0372 11.5 10.3971 11.3029 10.6429C11.1914 10.7829 11.0257 10.8571 10.8571 10.8571C10.7314 10.8571 10.6057 10.8171 10.5 10.7314L7.64288 8.44573C7.50859 8.33714 7.4286 8.1743 7.4286 8V3.42858H7.42855Z"
                                     fill="#5682ED"
                                   ></path>
-                                </svg>
+                                </svg> */}
+                                <img src={agency2} />
                               </span>
                               {moment(e.createdAt).fromNow()}
                             </li>
                             {e?.hide_compensation == false && (
                               <li>
-                                <span>
+                                {/* <span>
                                   <svg
                                     width="16"
                                     height="16"
@@ -323,14 +344,15 @@ async function editStatus(evt, status, id) {
                                       fill="#5682ED"
                                     ></path>
                                   </svg>
-                                </span>
+                                </span> */}
+                                <img src={jobs5} />
                                 {e?.min_compensation} - {e?.max_compensation}{" "}
                                 {e?.compensation_type.toUpperCase()}
                               </li>
                             )}
                             <li>
                               <span>
-                                <svg
+                                {/* <svg
                                   width="16"
                                   height="16"
                                   viewBox="0 0 16 16"
@@ -341,14 +363,15 @@ async function editStatus(evt, status, id) {
                                     d="M12 1.3999H4C1.6 1.3999 0 2.5999 0 5.3999V10.9999C0 13.7999 1.6 14.9999 4 14.9999H12C14.4 14.9999 16 13.7999 16 10.9999V5.3999C16 2.5999 14.4 1.3999 12 1.3999ZM4.8 12.7999H2.4C2.072 12.7999 1.8 12.5279 1.8 12.1999C1.8 11.8719 2.072 11.5999 2.4 11.5999H4.8C5.128 11.5999 5.4 11.8719 5.4 12.1999C5.4 12.5279 5.128 12.7999 4.8 12.7999ZM8 10.5999C6.67201 10.5999 5.6 9.5279 5.6 8.1999C5.6 6.8719 6.67201 5.7999 8 5.7999C9.328 5.7999 10.4 6.8719 10.4 8.1999C10.4 9.5279 9.328 10.5999 8 10.5999ZM13.6 4.7999H11.2C10.872 4.7999 10.6 4.5279 10.6 4.1999C10.6 3.8719 10.872 3.5999 11.2 3.5999H13.6C13.928 3.5999 14.2 3.8719 14.2 4.1999C14.2 4.5279 13.928 4.7999 13.6 4.7999Z"
                                     fill="#5682ED"
                                   ></path>
-                                </svg>
+                                </svg> */}
+                                <img src={agency4} />
                               </span>
                               {e?.min_work_exp} - {e?.max_work_exp} years
                               experience
                             </li>
                             <li>
                               <span>
-                                <svg
+                                {/* <svg
                                   width="16"
                                   height="16"
                                   viewBox="0 0 16 16"
@@ -359,7 +382,8 @@ async function editStatus(evt, status, id) {
                                     d="M12.8 1.4H3.2C1.432 1.4 0 2.74489 0 4.39956V12.0004C0 13.6551 1.432 15 3.2 15H12.8C14.568 15 16 13.6551 16 12.0004V4.39956C16 2.74489 14.568 1.4 12.8 1.4V1.4ZM5.2 4.55067C6.216 4.55067 7.048 5.33644 7.048 6.296C7.048 7.25555 6.216 8.04133 5.2 8.04133C4.184 8.04133 3.352 7.25555 3.352 6.296C3.352 5.33644 4.184 4.55067 5.2 4.55067ZM8.296 11.7209C8.224 11.7964 8.112 11.8418 8 11.8418H2.4C2.288 11.8418 2.176 11.7964 2.104 11.7209C2.032 11.6453 1.992 11.5396 2 11.4338C2.136 10.1644 3.208 9.15956 4.552 9.03867C4.976 9.00089 5.416 9.00089 5.84 9.03867C7.184 9.15956 8.264 10.1644 8.392 11.4338C8.408 11.5396 8.368 11.6453 8.296 11.7209ZM13.6 11.7889H12C11.672 11.7889 11.4 11.532 11.4 11.2222C11.4 10.9124 11.672 10.6556 12 10.6556H13.6C13.928 10.6556 14.2 10.9124 14.2 11.2222C14.2 11.532 13.928 11.7889 13.6 11.7889ZM13.6 8.76667H10.4C10.072 8.76667 9.8 8.50978 9.8 8.2C9.8 7.89022 10.072 7.63333 10.4 7.63333H13.6C13.928 7.63333 14.2 7.89022 14.2 8.2C14.2 8.50978 13.928 8.76667 13.6 8.76667ZM13.6 5.74444H9.6C9.272 5.74444 9 5.48756 9 5.17778C9 4.868 9.272 4.61111 9.6 4.61111H13.6C13.928 4.61111 14.2 4.868 14.2 5.17778C14.2 5.48756 13.928 5.74444 13.6 5.74444Z"
                                     fill="#5682ED"
                                   />
-                                </svg>
+                                </svg> */}
+                                <img src={jobs6} />
                               </span>
                               {e?.must_have_skills.join(", ")}
                             </li>

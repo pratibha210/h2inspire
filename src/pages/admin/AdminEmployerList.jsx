@@ -9,6 +9,8 @@ import {
 import "./Dashboard.css";
 import Loader from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
+import jobLoc1 from "../../assets/imgs/jobLoc.svg";                               
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -153,14 +155,13 @@ function AdminEmployerList() {
                     <li key={i}>
                       <div className="job-box">
                         <div className="job-header">
-                         
                           <div className="job-company">
                             <h4>
-                            {e?.fname}  {e?.lname}
+                              {e?.fname} {e?.lname}
                             </h4>
                             <div className="job-location">
                               <span>
-                                <svg
+                                {/* <svg
                                   width="18"
                                   height="18"
                                   viewBox="0 0 18 18"
@@ -181,22 +182,21 @@ function AdminEmployerList() {
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
                                   ></path>
-                                </svg>
+                                </svg> */}
+                                <img src={jobLoc1} />
                               </span>
                               <h5>{e.email}</h5>
                             </div>
                           </div>
                           <div className="button-holder">
-                          <Link
+                            <Link
                               to={`/admin/employer-details?id=${e?._id}`}
                               className="light-btm blue-light m-3"
                             >
                               Details
                             </Link>
-                         
                           </div>
                         </div>
-                        
                       </div>
                     </li>
                   );

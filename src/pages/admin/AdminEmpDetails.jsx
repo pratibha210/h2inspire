@@ -24,7 +24,7 @@ import coverimg from "../../assets/imgs/profile.svg";
       setLoading(false);
     }, 5000);
     fetchData();
-  }, [ fetching]);
+  }, [ fetching]);img
 
 
   return (
