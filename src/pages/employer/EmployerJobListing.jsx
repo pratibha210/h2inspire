@@ -20,11 +20,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import agency1 from "../../../assets/imgs/agency1.svg";
-import agency2 from "../../../assets/imgs/agency2.svg";
-import agency3 from "../../../assets/imgs/agency3.svg";
-import agency4 from "../../../assets/imgs/agency4.svg";
-import agency5 from "../../../assets/imgs/agency5.svg";
+import agency1 from "../../assets/imgs/agency1.svg";
+import agency2 from "../../assets/imgs/agency2.svg";
+import agency3 from "../../assets/imgs/agency3.svg";
+import agency4 from "../../assets/imgs/agency4.svg";
+import agency5 from "../../assets/imgs/agency5.svg";
 const style = {
   position: "absolute",
   top: "50%",
