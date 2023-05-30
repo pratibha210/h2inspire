@@ -14,7 +14,7 @@ import chat from "../../../assets/imgs/chat.svg";
 import iconimg from "../../../assets/imgs/icon.png";
 import dropdownsamll from "../../../assets/imgs/dropdown-small.svg";
 import lockIcon from "../../../assets/imgs/lock.svg";
-import jobLoc from "../../assets/imgs/jobLoc.svg";
+import jobLoc from "../../../assets/imgs/jobLoc.svg";
 import agency2 from "../../../assets/imgs/agency2.svg";
 import agency3 from "../../../assets/imgs/agency3.svg";
 import agency4 from "../../../assets/imgs/agency4.svg";
