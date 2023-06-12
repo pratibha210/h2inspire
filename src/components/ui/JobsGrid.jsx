@@ -44,12 +44,12 @@ function JobsGrid(props) {
                     <h3 className="section-heading-small">Choose our available <span>jobs</span></h3>
                     <p className="sub-heading-text">Find the following job that suits you and apply now</p>
                 </div>
-                <div className="right">
+                {/* <div className="right">
                     <div className="tab-nav">
                         <a href="#list1" className="active">Recent Jobs</a>
                         <a href="#list2">Popular Jobs</a>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="tabs-content">
                 <div id="list1" className="tab-content">

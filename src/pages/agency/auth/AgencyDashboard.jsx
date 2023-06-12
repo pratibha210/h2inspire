@@ -92,7 +92,7 @@ function AgencyDashboard() {
                 <div className="icon">
                   <img src={workIcon} />
                 </div>
-                <h3>No of working on Jobs</h3>
+                <h3>No of Active Jobs</h3>
                 <span className="count">
                   {dashboardData?.counts?.workingJobs}
                 </span>

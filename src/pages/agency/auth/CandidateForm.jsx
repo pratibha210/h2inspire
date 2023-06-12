@@ -18,6 +18,8 @@ import candidateform1 from "../../../assets/imgs/candidateform1.svg";
 import candidateform2 from "../../../assets/imgs/candidateform2.svg";
 import candidateform3 from "../../../assets/imgs/candidateform3.svg";
 import candidateform4 from "../../../assets/imgs/candidateform4.svg";
+import axios from "axios";
+import pdfIcon from "../../../assets/imgs/pdficon.png"
 
 function CandidateForm() {
   const [jobPostings, setJobPostings] = useState({});
@@ -27,6 +29,8 @@ function CandidateForm() {
   const [pageLoading, setPageLoading] = React.useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+const [countryList,setCountryList] = useState([]);
+
   let url = location.search;
   const inputRef = useRef(null);
 
@@ -118,7 +122,13 @@ function CandidateForm() {
   // useEffect(() => {
   //   console.log(quesArr, "quesArr");
   // }, [quesArr]);
-
+  useEffect(() => {
+    axios.get("https://restcountries.com/v2/all").then((res)=>{
+      setCountryList(res?.data);
+    }).catch((err)=>{
+      console.log(err,"err");
+    })
+   }, []);
   async function submitForm(event) {
     event.preventDefault();
     const formdata = new FormData(event.currentTarget);
@@ -352,14 +362,23 @@ function CandidateForm() {
                 <div className="row">
                   <div className="col-md-4">
                     <div className="mb-3">
-                      <input
+                      <select
                         required
                         type="text"
                         className="input-style2"
-                        id="country "
+                        id="country"
                         placeholder="Country"
                         name="country"
-                      />
+                      >
+                    <option value="" hidden> Select country </option>
+                    {countryList?.length > 0 && countryList?.map((x)=>{
+                      return(
+                        <option value={x.name}> {x.name} </option>
+                      )
+                    })}
+                    
+
+                      </select>
                     </div>
                   </div>
                   <div className="col-md-4">
@@ -413,7 +432,7 @@ function CandidateForm() {
                         <div className="upload">
                           <div className="overlap-upload">
                             {selectedFile !== "" ? (
-                              <img className="imageFont" src={selectedFile} />
+                              <img className="imageFont" src={pdfIcon} />
                             ) : (
                               <img src={uploadIcon} />
                             )}
