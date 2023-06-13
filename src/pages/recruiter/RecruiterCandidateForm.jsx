@@ -28,11 +28,12 @@ function RecruiterCandidateForm() {
   const [loading, setLoading] = React.useState(false);
   const [pageLoading, setPageLoading] = React.useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const[addMoreload, setaddMoreload] = useState(false)
   const navigate = useNavigate();
   let url = location.search;
   const inputRef = useRef(null);
   const [countryList,setCountryList] = useState([]);
-
+  const [addmoreFlag,setAddmoreFlag] = useState(false);
   let getCode = queryString.parse(url);
   const Toast = Swal.mixin({
     toast: true,
@@ -79,7 +80,7 @@ function RecruiterCandidateForm() {
 
   // On file upload (click the upload button)
   const onFileUpload = async (file) => {
-    console.log(file, "data");
+    // console.log(file, "data");
     const formData = new FormData();
     formData.append("file", file);
     await uploadFile(formData)
@@ -126,6 +127,16 @@ function RecruiterCandidateForm() {
     })
    }, []);
 
+
+
+//// to reset form /////
+
+const onAddMoreForm=(e)=>{
+  setAddmoreFlag(true);
+  
+}
+
+
   async function submitForm(event) {
     event.preventDefault();
     const formdata = new FormData(event.currentTarget);
@@ -144,19 +155,31 @@ function RecruiterCandidateForm() {
       linkedin_url: formdata.get("linkedin_url"),
       // must_have_qualification_q_a: quesArr,
     };
-
-    setLoading(true);
+    if(addmoreFlag == true){
+      setaddMoreload(true)
+    }else{
+      setLoading(true);
+    }
+    
     const resp = await submitCandidate(userData);
 
     setTimeout(() => {
       setLoading(false);
+      setaddMoreload(false)
     }, 2000);
     if (resp?.data?.error == false) {
       Toast.fire({
         icon: resp?.data?.error ? "error" : "success",
         title: resp?.data?.message,
       });
-      navigate(-1);
+      setSelectedFile("")
+      if(addmoreFlag == true){
+        document.getElementById("create-course-form").reset();
+        setSelectedFile("")
+        setAddmoreFlag(false)
+      }else{
+        navigate(-1);
+      }
     }
   }
 
@@ -210,313 +233,338 @@ function RecruiterCandidateForm() {
   };
   return (
     <>
-      {pageLoading == true ? (
-        <div className="contentLoader">
-          <Loader className="contentLoaderAnimate" />
-        </div>
-      ) : (
-        <>
-          <div className="recent-jobsection">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-              <h3 className="dash-heading">Candidate Submit Form</h3>
+    {pageLoading == true ? (
+      <div className="contentLoader">
+        <Loader className="contentLoaderAnimate" />
+      </div>
+    ) : (
+      <>
+        <div className="recent-jobsection">
+          <div className="d-flex justify-content-between align-items-center mb-4">
+            <h3 className="dash-heading">Candidate Submit Form</h3>
+          </div>
+
+          <form onSubmit={(e) => submitForm(e)} id="create-course-form">
+            <ul className="working-list">
+              <li>
+                <div className="working-box">
+                  <div className="box-header">
+                    <div className="profile-details-header">
+                      <div className="logo">
+                        <img src={iconimg} />
+                      </div>
+                      <div className="job-company">
+                        <h4 className="job-title">{jobPostings?.job_name}</h4>
+                        <div className="job-location">
+                          <div className="company-name">
+                            {jobPostings?.designation}
+                          </div>
+                          <span>
+                            <img src={candidateform1} />
+                          </span>
+                          <h5>{jobPostings?.job_location?.join(", ")}</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="other-details">
+                      <ul className="info-list">
+                        <li>
+                          <span>
+                            <img src={candidateform2} />
+                          </span>
+                          {moment(jobPostings.createdAt).fromNow()}
+                        </li>
+                        {jobPostings?.hide_compensation == false && (
+                          <li>
+                            <span>
+                              <img src={candidateform3} />
+                            </span>
+                            {jobPostings?.min_compensation} -{" "}
+                            {jobPostings?.max_compensation}{" "}
+                            {jobPostings?.compensation_type.toUpperCase()}
+                          </li>
+                        )}
+                        <li>
+                          <span>
+                            <img src={candidateform4} />
+                          </span>
+
+                          {jobPostings?.must_have_skills &&
+                            jobPostings?.must_have_skills.join(", ")}
+                        </li>
+                        <li className="csv-btns">
+                          <input
+                            style={{ display: "none" }}
+                            ref={inputRef}
+                            type="file"
+                            accept="application/csv"
+                            onChange={handleFileChange}
+                          />
+
+                          <div class="csv-btns-flex">
+                          <button type="button" onClick={handleClick} className="outline-btn">
+                            upload CSV
+                          </button>
+                          
+                          <button type="button" onClick={handleClick} className="btn-bg">
+                            download CSV
+                          </button>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <div className="form-box">
+              <h4 className="form-heading">Personal Information</h4>
+
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    <input
+                      required
+                      type="text"
+                      className="input-style2"
+                      id="fname"
+                      placeholder="First Name"
+                      name="fname"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    <input
+                      required
+                      type="text"
+                      className="input-style2"
+                      id="lname"
+                      placeholder="Last Name"
+                      name="lname"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    <input
+                      required
+                      maxLength={10}
+                      type="tel"
+                      className="input-style2"
+                      id="phone"
+                      placeholder="Phone Number"
+                      name="phone"
+                    />
+                  </div>
+                </div>
+                {/* <div class="col-md-4">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      class="input-style2"
+                      id=""
+                      placeholder="Extension (optional)"
+                      name=""
+                    />
+                  </div>
+                </div> */}
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    <input
+                      required
+                      type="email"
+                      className="input-style2"
+                      id="email"
+                      placeholder="Email"
+                      name="email"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    <select
+                      required
+                      type="text"
+                      className="input-style2"
+                      id="country"
+                      placeholder="Country"
+                      name="country"
+                    >
+                  <option value="" hidden> Select country </option>
+                  {countryList?.length > 0 && countryList?.map((x)=>{
+                    return(
+                      <option value={x.name}> {x.name} </option>
+                    )
+                  })}
+                  
+
+                    </select>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    <input
+                      required
+                      type="text"
+                      className="input-style2"
+                      id="city"
+                      placeholder="City"
+                      name="city"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="mb-3">
+                    <input
+                      required
+                      type="text"
+                      className="input-style2"
+                      id="state"
+                      placeholder="State"
+                      name="state"
+                    />
+                  </div>
+                </div>
+                <div className="col-md-2">
+                  <div className="mb-3">
+                    <input
+                      required
+                      type="tel"
+                      maxLength={6}
+                      className="input-style2"
+                      id="pin"
+                      placeholder="PIN Code"
+                      name="pin"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <span className="text-danger mx-3">{errorMessage}</span>
+
+                <div className="col-md-4">
+                  <div className="mb-3">
+                    {/* <div class="upload-file">
+                      <input required onChange={onFileChange}  type="file" class="" id="resume" name="resume" />
+                      <span>Upload Resume</span>
+                    </div> */}
+                    <div className="upload-wrap">
+                      <div className="upload">
+                        <div className="overlap-upload">
+                          {selectedFile !== "" ? (
+                            <img className="imageFont" src={pdfIcon} />
+                          ) : (
+                            <img src={uploadIcon} />
+                          )}
+
+                          <p>
+                            <span>Click to upload</span> or drag and drop
+                            Resume PDF here
+                          </p>
+                        </div>
+                        <input
+                          // accept="application/pdf"
+                          onChange={onFileChange}
+                          type="file"
+                          id="gst_file"
+                          className="fileupload"
+                          name="gst_file"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-md-8">
+                  <div className="mb-3">
+                    <input
+                      type="text"
+                      className="input-style2"
+                      id="linkedin_url"
+                      placeholder="LinkedIn Profile URl"
+                      name="linkedin_url"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <form onSubmit={(e) => submitForm(e)}>
-              <ul className="working-list">
-                <li>
-                  <div className="working-box">
-                    <div className="box-header">
-                      <div className="profile-details-header">
-                        <div className="logo">
-                          <img src={iconimg} />
-                        </div>
-                        <div className="job-company">
-                          <h4 className="job-title">{jobPostings?.job_name}</h4>
-                          <div className="job-location">
-                            <div className="company-name">
-                              {jobPostings?.designation}
-                            </div>
-                            <span>
-                              <img src={candidateform1} />
-                            </span>
-                            <h5>{jobPostings?.job_location?.join(", ")}</h5>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="other-details">
-                        <ul className="info-list">
-                          <li>
-                            <span>
-                              <img src={candidateform2} />
-                            </span>
-                            {moment(jobPostings.createdAt).fromNow()}
-                          </li>
-                          {jobPostings?.hide_compensation == false && (
-                            <li>
-                              <span>
-                                <img src={candidateform3} />
-                              </span>
-                              {jobPostings?.min_compensation} -{" "}
-                              {jobPostings?.max_compensation}{" "}
-                              {jobPostings?.compensation_type.toUpperCase()}
-                            </li>
-                          )}
-                          <li>
-                            <span>
-                              <img src={candidateform4} />
-                            </span>
+            <div className="form-box">
+              {/* <h4 className="form-heading">
+                Must-Have Qualifications
+                <p className="sub-heading-text">
+                  Describe how your candidate meets each of must-haves. Use
+                  this as a place to highlight candidate’s strengths.
+                </p>
+              </h4>
+              {jobPostings?.screeing_questions?.length > 0 &&
+                jobPostings?.screeing_questions?.map((x, i) => {
+                  return (
+                    <div className="mb-3">
+                      <p>
+                        {i + 1}. {x}
+                      </p>
+                      <textarea
+                        className="textarea-style2"
+                        rows="5"
+                        id="comment"
+                        name="must_have_qualification_q_a"
+                        onChange={(e) => onQuesChange(e, x, i)}
+                        // placeholder="3+ Years of Management Experience"
+                      ></textarea>
+                    </div>
+                  );
+                })} */}
 
-                            {jobPostings?.must_have_skills &&
-                              jobPostings?.must_have_skills.join(", ")}
-                          </li>
-                          <li>
-                            <input
-                              onChange={handleFileChange}
-                              accept="application/csv"
-                              type="file"
-                              placeholder="Upload CSV"
-                            ></input>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-
-              <div className="form-box">
-                <h4 className="form-heading">Personal Information</h4>
-
-                <div className="row">
-                  <div className="col-md-4">
-                    <div className="mb-3">
-                      <input
-                        required
-                        type="text"
-                        className="input-style2"
-                        id="fname"
-                        placeholder="First Name"
-                        name="fname"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="mb-3">
-                      <input
-                        required
-                        type="text"
-                        className="input-style2"
-                        id="lname"
-                        placeholder="Last Name"
-                        name="lname"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-4">
-                    <div className="mb-3">
-                      <input
-                        required
-                        maxLength={10}
-                        type="tel"
-                        className="input-style2"
-                        id="phone"
-                        placeholder="Phone Number"
-                        name="phone"
-                      />
-                    </div>
-                  </div>
-                  {/* <div class="col-md-4">
-                    <div class="mb-3">
-                      <input
-                        type="text"
-                        class="input-style2"
-                        id=""
-                        placeholder="Extension (optional)"
-                        name=""
-                      />
-                    </div>
-                  </div> */}
-                  <div className="col-md-4">
-                    <div className="mb-3">
-                      <input
-                        required
-                        type="email"
-                        className="input-style2"
-                        id="email"
-                        placeholder="Email Confirmation"
-                        name="email"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-4">
-                    <div className="mb-3">
-                    <select
-                        required
-                        type="text"
-                        className="input-style2"
-                        id="country"
-                        placeholder="Country"
-                        name="country"
-                      >
-                    <option value="" hidden> Select country </option>
-                    {countryList?.length > 0 && countryList?.map((x)=>{
-                      return(
-                        <option value={x.name}> {x.name} </option>
-                      )
-                    })}
-                    
-
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-4">
-                    <div className="mb-3">
-                      <input
-                        required
-                        type="text"
-                        className="input-style2"
-                        id="city"
-                        placeholder="City"
-                        name="city"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-2">
-                    <div className="mb-3">
-                      <input
-                        required
-                        type="text"
-                        className="input-style2"
-                        id="state"
-                        placeholder="State"
-                        name="state"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-md-2">
-                    <div className="mb-3">
-                      <input
-                        required
-                        type="tel"
-                        maxLength={6}
-                        className="input-style2"
-                        id="pin"
-                        placeholder="PIN Code"
-                        name="pin"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <span className="text-danger mx-3">{errorMessage}</span>
-
-                  <div className="col-md-4">
-                    <div className="mb-3">
-                      {/* <div class="upload-file">
-                        <input required onChange={onFileChange}  type="file" class="" id="resume" name="resume" />
-                        <span>Upload Resume</span>
-                      </div> */}
-                      <div className="upload-wrap">
-                        <div className="upload">
-                          <div className="overlap-upload">
-                            {selectedFile !== "" ? (
-                              <img className="imageFont" src={pdfIcon} />
-                            ) : (
-                              <img src={uploadIcon} />
-                            )}
-
-                            <p>
-                              <span>Click to upload</span> or drag and drop
-                              Resume PDF here
-                            </p>
-                          </div>
-                          <input
-                            // accept="application/pdf"
-                            onChange={onFileChange}
-                            type="file"
-                            id="gst_file"
-                            className="fileupload"
-                            name="gst_file"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-8">
-                    <div className="mb-3">
-                      <input
-                        type="text"
-                        className="input-style2"
-                        id="linkedin_url"
-                        placeholder="LinkedIn Profile URl"
-                        name="linkedin_url"
-                      />
-                    </div>
-                  </div>
-                </div>
+              <div className="form-check custom-check">
+                <input
+                  required
+                  className="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="check"
+                />
+                <label className="form-check-label" for="check">
+                  I agree to comply with your <a href="#"> privacy policy </a>{" "}
+                  and <a href="#">terms & conditions</a>
+                </label>
               </div>
+              {/* <span  className="text-danger mx-3">{errorMessage}</span> */}
 
-              <div className="form-box">
-                {/* <h4 className="form-heading">
-                  Must-Have Qualifications
-                  <p className="sub-heading-text">
-                    Describe how your candidate meets each of must-haves. Use
-                    this as a place to highlight candidate’s strengths.
-                  </p>
-                </h4>
-                {jobPostings?.screeing_questions?.length > 0 &&
-                  jobPostings?.screeing_questions?.map((x, i) => {
-                    return (
-                      <div className="mb-3">
-                        <p>
-                          {i + 1}. {x}
-                        </p>
-                        <textarea
-                          className="textarea-style2"
-                          rows="5"
-                          id="comment"
-                          name="must_have_qualification_q_a"
-                          onChange={(e) => onQuesChange(e, x, i)}
-                        ></textarea>
-                      </div>
-                    );
-                  })} */}
-
-                <div className="form-check custom-check">
-                  <input
-                    required
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="check"
-                  />
-                  <label className="form-check-label" for="check">
-                    I agree to comply with your <a href="#"> privacy policy </a>{" "}
-                    and <a href="#">terms & conditions</a>
-                  </label>
-                </div>
-                {/* <span  className="text-danger mx-3">{errorMessage}</span> */}
-
-                <button
-                  type="submit"
-                  className="next full-width-btm loginBtnLoader"
-                >
-                  {loading == true ? (
-                    <Loader className="btnLoader" />
-                  ) : (
-                    "Submit"
-                  )}
-                </button>
+            <div style={{display:"flex"}} className="btns-btm">
+              <button
+                type="submit"
+                className="next w-25 p-3 text-white backgrounfClass loginBtnLoader btn-button-outline"
+              >
+                {loading == true ? (
+                  <Loader className="btnLoader" />
+                ) : (
+                  "Submit"
+                )}
+              </button>
+              <button
+              onClick={(e)=> onAddMoreForm(e) }
+                type="submit"
+                className="next w-25 p-3 text-white backgrounfClass loginBtnLoader btn-button-bg"
+              >
+                {addMoreload == true ? (
+                  <Loader className="btnLoader" />
+                ) : (
+                  "Add more candidate"
+                )}
+              </button>
               </div>
-            </form>
-          </div>
-        </>
-      )}
-    </>
+            </div>
+          </form>
+        </div>
+      </>
+    )}
+  </>
   );
 }
 

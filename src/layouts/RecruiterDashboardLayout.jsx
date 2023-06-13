@@ -101,11 +101,11 @@ function RecruiterDashboardLayout() {
               <div className="cross">
                 <i className="fa-solid fa-xmark"></i>
               </div>
-              <ul>
+              {/* <ul>
                 <li>
                   <a href="#">PACKAGES</a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
             <a href="#" className="noticication">
               <img className="off" src={notification1} />

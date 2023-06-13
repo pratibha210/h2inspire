@@ -66,3 +66,86 @@
 .content-right .input-group {
     margin-left: 100px;
 }
+.backgrounfClass{
+    background: #1A2747;
+}
+.btns-btm {
+    margin-top: 14px;
+}
+.btns-btm button {
+    margin-right: 10px;
+    border: none;
+    border-radius: 3px;
+    transition: all .5s ease-in-out;
+}
+/* .info-l {
+    display: inline!important;
+} */
+.csv-btns button {
+    display: block!important;
+    width: 100%;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    padding: 6px 15px;
+    border: none;
+    border-radius: 3px;
+    background: #fff;
+    border: 1px solid transparent;
+    transition: all .5s ease-in-out;
+}
+.csv-btns button.outline-btn {
+    border-color: #1A2747;
+}
+.csv-btns button.outline-btn:hover {
+    background: #1A2747;
+    color: #fff;
+}
+.csv-btns .btn-bg {
+    background: #1A2747;
+    color: #fff;
+}
+.csv-btns .btn-bg:hover {
+    background: #5682ed!important;
+    border-color: #5682ed!important;
+    color: #fff;
+}
+.working-list > li .box-header {
+    padding: 15px!important;
+}
+.info-list {
+    flex-wrap: initial!important;
+}
+.csv-btns-flex {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.form-box select {
+    background: none;
+}
+.btn-button-outline {
+    background: none!important;
+    border: 1px solid #5682ed!important;
+    color: #1A2747!important;
+}
+.btn-button-outline:hover {
+    background: #5682ed!important;
+    color: #fff!important;
+}
+.btn-button-bg:hover {
+    background: #5682ed!important;
+    color: #fff!important;
+
+}
+.btn-bg-dark {
+    background: #1A2747!important;
+    color: #fff!important;
+    margin-bottom: 10px!important;
+}
+.btn-bg-dark:hover {
+    background: #5682ed!important;
+}
+p.light-btm.blue-light.btn-bg-dark {
+    margin-bottom: 14px!important;
+}

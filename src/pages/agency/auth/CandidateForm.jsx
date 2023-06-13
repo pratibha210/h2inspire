@@ -19,7 +19,7 @@ import candidateform2 from "../../../assets/imgs/candidateform2.svg";
 import candidateform3 from "../../../assets/imgs/candidateform3.svg";
 import candidateform4 from "../../../assets/imgs/candidateform4.svg";
 import axios from "axios";
-import pdfIcon from "../../../assets/imgs/pdficon.png"
+import pdfIcon from "../../../assets/imgs/pdficon.png";
 
 function CandidateForm() {
   const [jobPostings, setJobPostings] = useState({});
@@ -29,7 +29,9 @@ function CandidateForm() {
   const [pageLoading, setPageLoading] = React.useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-const [countryList,setCountryList] = useState([]);
+  const [countryList, setCountryList] = useState([]);
+  const [addmoreFlag, setAddmoreFlag] = useState(false);
+  const [addMoreload, setaddMoreload] = useState(false);
 
   let url = location.search;
   const inputRef = useRef(null);
@@ -119,18 +121,28 @@ const [countryList,setCountryList] = useState([]);
     setQuesArr(toUpdate);
   };
 
-  // useEffect(() => {
-  //   console.log(quesArr, "quesArr");
-  // }, [quesArr]);
+  ////////// get all country list /////////////////////
   useEffect(() => {
-    axios.get("https://restcountries.com/v2/all").then((res)=>{
-      setCountryList(res?.data);
-    }).catch((err)=>{
-      console.log(err,"err");
-    })
-   }, []);
+    axios
+      .get("https://restcountries.com/v2/all")
+      .then((res) => {
+        setCountryList(res?.data);
+      })
+      .catch((err) => {
+        console.log(err, "err");
+      });
+  }, []);
+
+  //// to reset form /////
+
+  const onAddMoreForm = (e) => {
+    setAddmoreFlag(true);
+  };
+
+  ////// on candidate submit function ////////////
   async function submitForm(event) {
     event.preventDefault();
+
     const formdata = new FormData(event.currentTarget);
 
     const userData = {
@@ -148,18 +160,30 @@ const [countryList,setCountryList] = useState([]);
       // must_have_qualification_q_a: quesArr,
     };
 
-    setLoading(true);
+    if (addmoreFlag == true) {
+      setaddMoreload(true);
+    } else {
+      setLoading(true);
+    }
     const resp = await submitCandidate(userData);
 
     setTimeout(() => {
       setLoading(false);
+      setaddMoreload(false);
     }, 2000);
     if (resp?.data?.error == false) {
       Toast.fire({
         icon: resp?.data?.error ? "error" : "success",
         title: resp?.data?.message,
       });
-      navigate(-1);
+      setSelectedFile("");
+      if (addmoreFlag == true) {
+        document.getElementById("create-course-form").reset();
+        setSelectedFile("");
+        setAddmoreFlag(false);
+      } else {
+        navigate(-1);
+      }
     }
   }
 
@@ -184,12 +208,6 @@ const [countryList,setCountryList] = useState([]);
     const formData = new FormData();
     formData.append("agency_job", getCode?.id);
     formData.append("file", file);
-    // for (const value of formData.keys()) {
-    //   console.log(value,"keyssssss");
-    // }
-    // for (const value of formData.values()) {
-    //   console.log(value,"valuessssss");
-    // }
 
     await submitCandidateByCsv(formData)
       .then((res) => {
@@ -224,7 +242,7 @@ const [countryList,setCountryList] = useState([]);
               <h3 className="dash-heading">Candidate Submit Form</h3>
             </div>
 
-            <form onSubmit={(e) => submitForm(e)}>
+            <form onSubmit={(e) => submitForm(e)} id="create-course-form">
               <ul className="working-list">
                 <li>
                   <div className="working-box">
@@ -272,7 +290,7 @@ const [countryList,setCountryList] = useState([]);
                             {jobPostings?.must_have_skills &&
                               jobPostings?.must_have_skills.join(", ")}
                           </li>
-                          <li>
+                          <li className="csv-btns">
                             <input
                               style={{ display: "none" }}
                               ref={inputRef}
@@ -281,9 +299,23 @@ const [countryList,setCountryList] = useState([]);
                               onChange={handleFileChange}
                             />
 
-                            <button type="button" onClick={handleClick}>
-                              upload CSV
-                            </button>
+                            <div class="csv-btns-flex">
+                              <button
+                                type="button"
+                                onClick={handleClick}
+                                className="outline-btn"
+                              >
+                                upload CSV
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={handleClick}
+                                className="btn-bg"
+                              >
+                                download CSV
+                              </button>
+                            </div>
                           </li>
                         </ul>
                       </div>
@@ -370,14 +402,14 @@ const [countryList,setCountryList] = useState([]);
                         placeholder="Country"
                         name="country"
                       >
-                    <option value="" hidden> Select country </option>
-                    {countryList?.length > 0 && countryList?.map((x)=>{
-                      return(
-                        <option value={x.name}> {x.name} </option>
-                      )
-                    })}
-                    
-
+                        <option value="" hidden>
+                          {" "}
+                          Select country{" "}
+                        </option>
+                        {countryList?.length > 0 &&
+                          countryList?.map((x) => {
+                            return <option value={x.name}> {x.name} </option>;
+                          })}
                       </select>
                     </div>
                   </div>
@@ -510,16 +542,29 @@ const [countryList,setCountryList] = useState([]);
                 </div>
                 {/* <span  className="text-danger mx-3">{errorMessage}</span> */}
 
-                <button
-                  type="submit"
-                  className="next full-width-btm loginBtnLoader"
-                >
-                  {loading == true ? (
-                    <Loader className="btnLoader" />
-                  ) : (
-                    "Submit"
-                  )}
-                </button>
+                <div style={{ display: "flex" }} className="btns-btm">
+                  <button
+                    type="submit"
+                    className="next w-25 p-3 text-white backgrounfClass loginBtnLoader btn-button-outline"
+                  >
+                    {loading == true ? (
+                      <Loader className="btnLoader" />
+                    ) : (
+                      "Submit"
+                    )}
+                  </button>
+                  <button
+                    onClick={(e) => onAddMoreForm(e)}
+                    type="submit"
+                    className="next w-25 p-3 text-white backgrounfClass loginBtnLoader btn-button-bg"
+                  >
+                    {addMoreload == true ? (
+                      <Loader className="btnLoader" />
+                    ) : (
+                      "Add more candidate"
+                    )}
+                  </button>
+                </div>
               </div>
             </form>
           </div>

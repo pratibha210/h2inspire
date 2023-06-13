@@ -1,0 +1,8 @@
+.job-box-header {
+    display: flex;
+  justify-content: flex-start!important;
+  margin-bottom: 30px;
+}
+.job-box-header .logo {
+    margin-right: 20px;
+}

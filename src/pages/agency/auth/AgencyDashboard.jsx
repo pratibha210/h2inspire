@@ -4,6 +4,7 @@ import Loader from "@mui/material/CircularProgress";
 import { agencyAccountDetails, agenciesDashboardData } from "../../../api/api";
 import moment from "moment-timezone";
 import Swal from "sweetalert2";
+import "./agencydashboard.css";
 import workIcon from "../../../assets/imgs/work.svg";
 import jobsIcon from "../../../assets/imgs/jobs.svg";
 import declinedIcon from "../../../assets/imgs/declined.svg";
@@ -148,8 +149,8 @@ function AgencyDashboard() {
                 dashboardData?.data?.map((e, i) => {
                   return (
                     <li key={i}>
-                      <div className="job-box">
-                        <div className="job-header">
+                      <div className="job-box dash-job-box">
+                        <div className="job-box-header">
                           <div className="logo">
                             <img src={icon1} />
                           </div>

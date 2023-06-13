@@ -55,6 +55,7 @@ import AdminEmployerList from './pages/admin/AdminEmployerList';
 import AdminEmpDetails from './pages/admin/AdminEmpDetails';
 import CreditsList from './pages/employer/CreditsList';
 import CreditsListPage from './pages/admin/CreditsListPage';
+import JobDetails from './pages/agency/auth/JobDetails';
 export default function Router() {
   const user = localStorage.getItem("AUTH_USER");
   // console.log('user >>>>>>>>>>>>>> ', user);
@@ -176,6 +177,8 @@ export default function Router() {
           { path: 'welcome', element: <RequireAuth><AgencyWelcomePage /></RequireAuth>  },
           { path: 'recruiter-list', element: <RequireAuth><RecruiterList /></RequireAuth>  },
           { path: 'candidate-chat', element: <RequireAuth><CandidateChat /></RequireAuth>  },
+          { path: 'job-details', element: <RequireAuth><JobDetails /></RequireAuth>  },
+
 
           { path: 'change-password', element: <RequireAuth><AgencyChangePassword /></RequireAuth>  },
           // { path: '*', element: <Navigate to="/agency/dashboard" /> },

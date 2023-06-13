@@ -1,12 +1,9 @@
 import moment from "moment-timezone";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import {
-  agencySelfJobAssignDeclne,
-  allAgencyJobslist,
-} from "../../../api/api";
+import { agencySelfJobAssignDeclne, allAgencyJobslist } from "../../../api/api";
 import "../../employer/EmployerDashboard.css";
+import { useNavigate } from "react-router-dom";
 import Loader from "@mui/material/CircularProgress";
 import agency1 from "../../../assets/imgs/agency1.svg";
 import agency2 from "../../../assets/imgs/agency2.svg";
@@ -14,12 +11,11 @@ import agency3 from "../../../assets/imgs/agency3.svg";
 import agency4 from "../../../assets/imgs/agency4.svg";
 import agency5 from "../../../assets/imgs/agency5.svg";
 
-
 function JobsList() {
   const [jobPostings, setJobPostings] = useState([]);
   const [status, setStatus] = useState("");
   const [fetching, setFetching] = useState(false);
-
+  const navigate = useNavigate();
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -45,7 +41,7 @@ function JobsList() {
       // You can await here
       const resp = await allAgencyJobslist();
       console.log("resp  >>>>>>>>>> ", resp);
-      
+
       if (resp?.data?.error == false) {
         setJobPostings(resp?.data?.data);
         setFetching(false);
@@ -59,70 +55,71 @@ function JobsList() {
     return { __html: val };
   }
 
-// console.log(jobPostings,"jobPostingsjobPostingsjobPostings");
-async function updateStatus(evt, status, id) {
-  evt.preventDefault();
-  console.log({ status, id });
+  // console.log(jobPostings,"jobPostingsjobPostingsjobPostings");
+  async function updateStatus(evt, status, id) {
+    evt.preventDefault();
+    console.log({ status, id });
 
-  if(status == "1"){
-    Swal.fire({
-      title: "Do you want to work on this job?",
-      showDenyButton: true,
-      showCancelButton: false,
-      confirmButtonText: "Yes",
-      denyButtonText: `Keep it pending`,
-    }).then(async (result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        const resp = await agencySelfJobAssignDeclne({"status": status, "jobId": id });
-        if (resp?.data?.error == false) {
-          Toast.fire({
-            icon: resp?.data?.error ? "error" : "success",
-            title: resp?.data?.message,
+    if (status == "1") {
+      Swal.fire({
+        title: "Do you want to work on this job?",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Yes",
+        denyButtonText: `Keep it pending`,
+      }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          const resp = await agencySelfJobAssignDeclne({
+            status: status,
+            jobId: id,
           });
-          setFetching(true);
-        } else {
-          Toast.fire({
-            icon: resp?.response?.data?.error ? "error" : "success",
-            title: resp?.response?.data?.message,
-          });
+          if (resp?.data?.error == false) {
+            Toast.fire({
+              icon: resp?.data?.error ? "error" : "success",
+              title: resp?.data?.message,
+            });
+            setFetching(true);
+          } else {
+            Toast.fire({
+              icon: resp?.response?.data?.error ? "error" : "success",
+              title: resp?.response?.data?.message,
+            });
+          }
+        } else if (result.isDenied) {
         }
-      }
-      
-      else if (result.isDenied) {
-      }
-    });
+      });
+    } else {
+      Swal.fire({
+        title: "Do you want to decline the job?",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Yes",
+        denyButtonText: `Keep it pending`,
+      }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          const resp = await agencySelfJobAssignDeclne({
+            status: status,
+            jobId: id,
+          });
+          if (resp?.data?.error == false) {
+            Toast.fire({
+              icon: resp?.data?.error ? "error" : "success",
+              title: resp?.data?.message,
+            });
+            setFetching(true);
+          } else {
+            Toast.fire({
+              icon: resp?.response?.data?.error ? "error" : "success",
+              title: resp?.response?.data?.message,
+            });
+          }
+        } else if (result.isDenied) {
+        }
+      });
+    }
   }
-  else{
-  Swal.fire({
-    title: "Do you want to decline the job?",
-    showDenyButton: true,
-    showCancelButton: false,
-    confirmButtonText: "Yes",
-    denyButtonText: `Keep it pending`,
-  }).then(async (result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      const resp = await agencySelfJobAssignDeclne({"status": status, "jobId": id });
-      if (resp?.data?.error == false) {
-        Toast.fire({
-          icon: resp?.data?.error ? "error" : "success",
-          title: resp?.data?.message,
-        });
-        setFetching(true);
-      } else {
-        Toast.fire({
-          icon: resp?.response?.data?.error ? "error" : "success",
-          title: resp?.response?.data?.message,
-        });
-      }
-    }
-    
-    else if (result.isDenied) {
-    }
-  });
-}
-}
   return (
     <>
       {loading == true ? (
@@ -133,8 +130,7 @@ async function updateStatus(evt, status, id) {
         <>
           <div className="recent-jobsection">
             <div className="d-flex justify-content-between align-items-center mb-4">
-              <h3 className="dash-heading">All New Jobs
-              </h3>
+              <h3 className="dash-heading">All New Jobs</h3>
               {/* <div className="short">
                 Sort By:
                 <select
@@ -155,13 +151,13 @@ async function updateStatus(evt, status, id) {
                     <li key={i}>
                       <div className="job-box">
                         <div className="job-header">
-                          {/* <div className="logo">
-                            <img
-                              src={e?.employer?.employer_image}
-                              alt="Employer image"
-                            />
-                          </div> */}
-                          <div className="job-company">
+                         
+                          <div style={{cursor: "pointer"}}
+                            className="job-company"
+                            onClick={() =>
+                              navigate("/agency/job-details?id=" + e._id)
+                            }
+                          >
                             <h4>
                               {e?.job_name}
                               {/* <span className="text-muted">
@@ -174,20 +170,42 @@ async function updateStatus(evt, status, id) {
                             </h4>
                             <div className="job-location">
                               <span>
-                              <img src={agency1} />
+                                <img src={agency1} />
                               </span>
-                              <h5>  {e?.job_location.join(", ")} </h5>
+                              <h5> {e?.job_location.join(", ")} </h5>
                             </div>
                           </div>
+                          <div class="col-12 col-md-3 text-center">
+                            <div class="listing-main-btns">
+                              <a
+                                href="javascript:void(0)"
+                                class="word-btm-disable"
+                                onClick={(evt) =>
+                                  updateStatus(evt, "1", e?._id)
+                                }
+                              >
+                                work on
+                              </a>
 
-                          <div className="button-holder">
-                          <p className="light-btm blue-light" onClick={(evt) => updateStatus(evt, "1", e?._id)}>
+                              <a
+                                href="javascript:void(0)"
+                                class="light-btm red-light"
+                                onClick={(evt) =>
+                                  updateStatus(evt, "2", e?._id)
+                                }
+                              >
+                                Decline
+                              </a>
+                            </div>
+                          </div>
+                          {/* <div className="button-holder">
+                          <p className="light-btm blue-light btn-bg-dark" onClick={(evt) => updateStatus(evt, "1", e?._id)}>
                               Work on
                             </p>
                             <p className="light-btm red-light" onClick={(evt) => updateStatus(evt, "2", e?._id)}>
                               Decline
                             </p>
-                          </div>
+                          </div> */}
                           {/* <div className="button-holder">
                             <Link
                               to={`/employer/job-posting?jobId=${e.job?._id}`}
@@ -205,7 +223,7 @@ async function updateStatus(evt, status, id) {
                           </div> */}
                         </div>
                         <div className="job-content">
-                        <h2>{e?.designation}</h2>
+                          <h2>{e?.designation}</h2>
                           {/* {e.job_description} */}
                           <div
                             dangerouslySetInnerHTML={createMarkup(
@@ -215,14 +233,14 @@ async function updateStatus(evt, status, id) {
                           <ul>
                             <li>
                               <span>
-                              <img src={agency2} />
+                                <img src={agency2} />
                               </span>
                               {moment(e.createdAt).fromNow()}
                             </li>
                             {e?.hide_compensation == false && (
                               <li>
                                 <span>
-                                <img src={agency3} />
+                                  <img src={agency3} />
                                 </span>
                                 {e?.min_compensation} - {e?.max_compensation}{" "}
                                 {e?.compensation_type.toUpperCase()}
@@ -230,14 +248,14 @@ async function updateStatus(evt, status, id) {
                             )}
                             <li>
                               <span>
-                              <img src={agency4} />
+                                <img src={agency4} />
                               </span>
                               {e?.min_work_exp} - {e?.max_work_exp} years
                               experience
                             </li>
                             <li>
                               <span>
-                              <img src={agency5} />
+                                <img src={agency5} />
                               </span>
                               {e?.must_have_skills.join(", ")}
                             </li>
