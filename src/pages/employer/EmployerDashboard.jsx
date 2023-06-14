@@ -28,7 +28,7 @@ function EmployerDashboard() {
     async function fetchData() {
       // You can await here
       const resp = await allJobPostingsByEmployer();
-      console.log("resp  >>>>>>>>>> ", resp);
+      // console.log("resp  >>>>>>>>>> ", resp);
       if (resp?.response?.status == 500) {
         localStorage.clear();
         navigate("/");
@@ -65,7 +65,7 @@ function EmployerDashboard() {
                 <div className="icon">
                   <img src={work} />
                 </div>
-                <h3>Total no of jobs posted</h3>
+                <h3>Total no. of jobs posted</h3>
                 <span className="count">{jobPostings.length}</span>
               </div>
             </li>
@@ -74,7 +74,7 @@ function EmployerDashboard() {
                 <div className="icon">
                   <img src={jobs} />
                 </div>
-                <h3>No of open jobs</h3>
+                <h3>No. of open jobs</h3>
                 <span className="count">
                   {jobPostings.filter((e) => e.status == "1").length}
                 </span>
@@ -85,7 +85,7 @@ function EmployerDashboard() {
                 <div className="icon">
                   <img src={declined} />
                 </div>
-                <h3>No of closed jobs</h3>
+                <h3>No. of closed jobs</h3>
                 <span className="count">
                   {jobPostings.filter((e) => e.status == "2").length}
                 </span>
@@ -96,7 +96,7 @@ function EmployerDashboard() {
                 <div className="icon">
                   <img src={declined} />
                 </div>
-                <h3>No of draft jobs</h3>
+                <h3>No. of draft jobs</h3>
                 <span className="count">
                   {jobPostings.filter((e) => e.status == "3").length}
                 </span>
@@ -124,7 +124,7 @@ function EmployerDashboard() {
                     return (
                       <li key={i}>
                         <div className="job-box">
-                          <div className="job-header">
+                          <div style={{justifyContent:"initial"}} className="job-header">
                             <div className="logo">
                               <img
                                 src={e?.employer?.employer_image}

@@ -122,7 +122,7 @@ function AgencyList() {
             </div>
             <ul className="job-list job-list__single">
               <li>
-                <button onClick={() => handleModalOpen()}>INVITE AGENCY</button>
+                <button className="next w-15 p-2 text-white backgrounfClass loginBtnLoader btn-button-bg" onClick={() => handleModalOpen()}>INVITE AGENCY</button>
               </li>
               {jobPostings.length ? (
                 jobPostings.map((e, i) => {

@@ -7,7 +7,13 @@
     flex: 0 0 258px;
 }
 
-
+.listing-main-btns a.word-btm-disable {
+    margin-right: 12px;
+    background: #f2f7fa !important;
+    /* border: 1px solid #5682ed; */
+    border-radius: 3px;
+    color: #5682ed;
+}
 /* .blocks-wrapper {
     position: absolute;
     top: 10%;
@@ -68,6 +74,7 @@
 }
 .backgrounfClass{
     background: #1A2747;
+    border-radius: 7px;
 }
 .btns-btm {
     margin-top: 14px;
