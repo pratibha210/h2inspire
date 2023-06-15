@@ -290,9 +290,9 @@ function JobDetails() {
 
             <div class="col-12 col-md-3 text-center">
                 <div class="listing-main-btns">
-                    <a href="javascript:void(0)" class="word-btm-disable" onClick={(evt) => updateStatus(evt, "1")}>work on</a>
+                    <a href="javascript:void(0)" class="light-btm blue-light margin-right btn-bg" onClick={(evt) => updateStatus(evt, "1")}>work on</a>
 
-                    <a href="javascript:void(0)" class="button-style dark-blue-button" onClick={(evt) => updateStatus(evt, "2")}>Decline</a>
+                    <a href="javascript:void(0)" class="light-btm red-light " onClick={(evt) => updateStatus(evt, "2")}>decline</a>
                 </div>
             </div>
         </div>

@@ -229,7 +229,9 @@ function EmployerJobListing() {
                   return (
                     <li key={i}>
                       <div className="job-box">
+                      
                         <div className="job-header">
+                          <div class="job-inner">
                           <div className="logo">
                             <img
                               src={e?.employer?.employer_image}
@@ -254,10 +256,11 @@ function EmployerJobListing() {
                               <h5>{e.job_location.join(", ")}</h5>
                             </div>
                           </div>
+                          </div>
                           <div className="button-holder">
                             <Link
                               to={`/employer/job-posting?jobId=${e._id}`}
-                              className="light-btm blue-light m-3"
+                              className="light-btm blue-light m-3 btn-bg"
                             >
                               Edit
                             </Link>

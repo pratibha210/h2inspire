@@ -156,3 +156,12 @@
 p.light-btm.blue-light.btn-bg-dark {
     margin-bottom: 14px!important;
 }
+.margin-right {
+    margin-right: 10px!important;
+    text-transform: capitalize;
+}
+.job-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}

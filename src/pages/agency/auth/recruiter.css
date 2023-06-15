@@ -1,0 +1,14 @@
+.recuiter_btn {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    background: #1A2747;
+    color: #fff;
+    font-weight: 600;
+    text-transform: capitalize;
+    transition: all .3s ease-in-out;
+}
+.recuiter_btn:hover {
+    background: #5682ed;
+    color: #fff;
+}

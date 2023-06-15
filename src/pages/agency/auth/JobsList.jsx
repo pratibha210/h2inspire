@@ -10,6 +10,7 @@ import agency2 from "../../../assets/imgs/agency2.svg";
 import agency3 from "../../../assets/imgs/agency3.svg";
 import agency4 from "../../../assets/imgs/agency4.svg";
 import agency5 from "../../../assets/imgs/agency5.svg";
+import {Link} from "react-router-dom";
 
 function JobsList() {
   const [jobPostings, setJobPostings] = useState([]);
@@ -175,9 +176,27 @@ function JobsList() {
                               <h5> {e?.job_location.join(", ")} </h5>
                             </div>
                           </div>
-                          <div class="col-12 col-md-3 text-center">
-                            <div class="listing-main-btns">
-                              <a
+                          <div className="button-holder">
+                            <Link
+                              to={`#`}
+                              onClick={(evt) =>
+                                  updateStatus(evt, "1", e?._id)
+                                }
+                              className="light-btm blue-light margin-right btn-bg"
+                            >
+                              work on
+                            </Link>
+                            <a
+                              href="#"
+                              className="light-btm red-light"
+                              onClick={(evt) =>
+                                  updateStatus(evt, "2", e?._id)
+                                }
+                            >
+                              Decline
+                            </a>
+                            
+                              {/* <a
                                 href="javascript:void(0)"
                                 class="word-btm-disable"
                                 onClick={(evt) =>
@@ -195,9 +214,8 @@ function JobsList() {
                                 }
                               >
                                 Decline
-                              </a>
+                              </a> */}
                             </div>
-                          </div>
                           {/* <div className="button-holder">
                           <p className="light-btm blue-light btn-bg-dark" onClick={(evt) => updateStatus(evt, "1", e?._id)}>
                               Work on

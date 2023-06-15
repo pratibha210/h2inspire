@@ -28,6 +28,9 @@ function AgencyDashboard() {
   const agencyDetailsFunction = async () => {
     await agencyAccountDetails(user?._id)
       .then((res) => {
+        setTimeout(()=>{
+          setLoading(false);
+        },5000);
         if (res?.response?.status == 500) {
           localStorage.clear();
           navigate("/");
@@ -47,6 +50,9 @@ function AgencyDashboard() {
   const getAgencyDashboardFunction = async () => {
     await agenciesDashboardData(user?._id)
       .then((res) => {
+        setTimeout(()=>{
+          setLoading(false);
+        },5000);
         // console.log(res, "ressssssss");
         if (res?.response?.status == 401) {
           localStorage.clear();
@@ -64,11 +70,11 @@ function AgencyDashboard() {
     return { __html: val };
   }
   useEffect(() => {
-    setTimeout(() => {
+    // setTimeout(() => {
       agencyDetailsFunction();
       getAgencyDashboardFunction();
-      setLoading(false);
-    }, 5000);
+    
+    // }, 5000);
   }, [user]);
 
 

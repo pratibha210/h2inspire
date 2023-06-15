@@ -148,7 +148,7 @@ function Home() {
                 </div>
             </section>
 
-            <JobsGrid />
+            {/* <JobsGrid /> */}
 
             <ContactUsSection />
             {/* <div className="banner">

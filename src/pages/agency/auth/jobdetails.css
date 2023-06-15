@@ -3966,6 +3966,14 @@ h5.listing-main-heading-txt {
   margin: 0 12px 0 0;
 }
 
+.listing-main-btns .light-btm {
+  padding: 10px 20px!important;
+  font-size: 13px!important;
+}
+.btn-bg {
+  background: #1a2747;
+  color: #fff;
+}
 @media (max-width: 767px) {
   .job-designation h2 {
     font-size: 20px;
@@ -3984,3 +3992,5 @@ h5.listing-main-heading-txt {
     margin: 0 4px;
   }
 }
+
+

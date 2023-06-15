@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import agency1 from "../../../assets/imgs/agency1.svg";
-
+import "./recruiter.css";
 
 
 const style = {
@@ -204,7 +204,7 @@ let body = {
 
             </div>
             <ul className="job-list job-list__single">
-            <li><button  onClick={() => handleModalOpen()}>INVITE RECRUITER</button></li>
+            <li><button  onClick={() => handleModalOpen()} className="recuiter_btn">invite recruiter</button></li>
               {jobPostings.length ? (
                 jobPostings.map((x, i) => {
                   return (
