@@ -16,6 +16,7 @@ import notification1 from "../assets/imgs/notification-on.svg";
 import notification2 from "../assets/imgs/notification.png";
 import profile1 from "../assets/imgs/profile.svg";
 import archive1 from "../assets/imgs/archive.svg";
+import logoutIcon from "../assets/imgs/logout.png";
 
 
 
@@ -198,7 +199,7 @@ const gotoProfile=()=>{
                       <a href="#" onClick={() => {
                         auth.logout()
                       }}>
-                          <img src={archive1} />
+                          <img className='logoutdesign' src={logoutIcon} />
                           <span>Log Out</span>
                       </a>
                   </li>

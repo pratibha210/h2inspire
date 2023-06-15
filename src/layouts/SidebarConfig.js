@@ -1,4 +1,9 @@
 import work from "../assets/imgs/work.svg";
+import Group from "../assets/imgs/Group.png";
+import decline from "../assets/imgs/decline.png";
+import archiveicon from "../assets/imgs/archiveicon.png";
+
+
 const SidebarConfig = [
   {
     title: "Job List",
@@ -36,18 +41,19 @@ const AgencySidebarConfig = [
   {
     title: "WORKING ON",
     path: "/agency/working-on",
-    icon: work,
+    icon: Group,
   },
 
   {
     title: "DECLINED JOBS",
     path: "/agency/decline-jobs",
-    icon: work,
+    icon: decline,
   },
   {
     title: "ARCHIVED JOBS",
     path: "/agency/archive-jobs",
     icon: work,
+    // className: "logoutdesign"
   },
   {
     title: "RECRUITERS LIST",

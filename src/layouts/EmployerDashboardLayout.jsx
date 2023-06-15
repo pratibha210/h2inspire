@@ -22,6 +22,7 @@ import profile from "../assets/imgs/profile.svg";
 import notificationOn from "../assets/imgs/notification-on.svg";
 import archive from "../assets/imgs/archive.svg";
 import logo from "../assets/imgs/logo.png";
+import logoutIcon from "../assets/imgs/logout.png";
 
 const style = {
   position: "absolute",
@@ -245,7 +246,7 @@ function EmployerDashboardLayout(props) {
                       auth.logout();
                     }}
                   >
-                    <img src={archive} />
+                    <img className='logoutdesign' src={logoutIcon} />
                     <span>Log Out</span>
                   </a>
                 </li>

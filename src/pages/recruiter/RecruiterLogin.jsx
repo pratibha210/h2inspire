@@ -27,11 +27,11 @@ function RecruiterLogin() {
   useEffect(() => {
     setTimeout(() => {
       setPageLoading(false)
-    }, 3000)
+    }, 5000)
   }, [])
 
   const onPasswordChange = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setPassword(e.target.value);
   };
   const handleSubmit = async (event) => {
@@ -51,7 +51,7 @@ function RecruiterLogin() {
       .then((res) => {
         setLoading(false);
         const { response } = res;
-        console.log(res, "resss");
+        // console.log(res, "resss");
 
         if (response?.data?.error === true) {
           setErrorMessage(response?.data.message);
@@ -75,7 +75,7 @@ function RecruiterLogin() {
       .catch((err) => {
         setLoading(false);
 
-        console.log(err);
+        // console.log(err);
       });
   };
 

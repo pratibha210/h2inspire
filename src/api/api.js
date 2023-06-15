@@ -983,6 +983,20 @@ export async function uploadResume(formData, id){
 
 
 /**
+ * @api testimonialList
+ * @returns promise
+ */
+ export async function testimonialList() {
+    try {
+        const response = await axios.get(apiUrl+ "testimonial/list")
+        // console.log("allJobPostings response >>>>>>>> ", response)
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+/**
  * This method is to logout user
  */
 export function logoutUser() {

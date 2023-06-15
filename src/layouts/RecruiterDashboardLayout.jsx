@@ -21,6 +21,7 @@ import Box from "@mui/material/Box";
 import archive1 from "../assets/imgs/archive.svg";
 import profile1 from "../assets/imgs/profile.svg";
 import notification2 from "../assets/imgs/notification.png";
+import logoutIcon from "../assets/imgs/logout.png";
 
 import notification1 from "../assets/imgs/notification-on.svg";
 
@@ -158,7 +159,7 @@ function RecruiterDashboardLayout() {
                       auth.logout();
                     }}
                   >
-                    <img src={archive1} />
+                    <img className='logoutdesign' src={logoutIcon} />
                     <span>Log Out</span>
                   </a>
                 </li>
